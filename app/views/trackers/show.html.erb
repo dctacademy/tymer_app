@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Batch:</strong>
+  <%= @tracker.batch_id %>
+</p>
+
+<p>
+  <strong>Start datetime:</strong>
+  <%= @tracker.start_datetime %>
+</p>
+
+<p>
+  <strong>End datetime:</strong>
+  <%= @tracker.end_datetime %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tracker.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tracker.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_tracker_path(@tracker) %> |
+<%= link_to 'Back', trackers_path %>

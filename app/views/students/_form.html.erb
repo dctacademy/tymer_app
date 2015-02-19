@@ -1,0 +1,56 @@
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :mobile %><br>
+    <%= f.text_field :mobile, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :about %><br>
+    <%= f.text_area :about, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :learning_preference %><br>
+    <%= f.radio_button :learning_style, "class_room" %> Class Room
+    <%= f.radio_button :learning_style, "online" %> Online
+  </div>
+  <div class="form-group">
+    <%= f.label :student_source_id %><br>
+    <%= f.collection_select :student_source_id, current_user.student_sources, :id, :name, {prompt: "Select"}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :student_type %><br>
+    <%= f.select :student_type, %w{lead prospect enrolled lost},{prompt: "Select"}, {class: "form-control"} %>
+  </div>
+  
+  <div class="form-group">
+    <label>Select Courses:</label>
+    <br/>
+    <% current_user.courses.all.each do |course| %>
+    <%= check_box_tag "student[course_ids][]", course.id, @student.course_ids.include?(course.id), :id => dom_id(course) %>
+    <%= label_tag dom_id(course), course.name %><br/>
+  <% end %>
+</div>
+
+  <div class="actions"> 
+    <%= f.submit "Submit", class: "btn btn-default" %> or <%= link_to 'Back', students_path %>
+  </div>
+<% end %>

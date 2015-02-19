@@ -1,0 +1,140 @@
+<div class="col-md-7">
+  <div class="page-header">
+    <h2><%= @batch.title %></h2>
+     <span class="label label-default"> <%= @batch.status? ? "on going" : "completed" %></span>
+  </div>
+  
+  <%= form_for(@message) do |f| %>
+
+  <div class="form-group">
+    <%= f.text_area :body, class: "form-control", placeholder: "Send message to the batch students" %>
+  </div>
+  <%= f.hidden_field :batch_id, value: @batch.id %>
+  <div class="actions">
+    <%= f.submit "Send", class: "btn btn-default" %>
+  </div>
+<% end %>
+  <br/>
+  
+  <div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Tracker</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Another</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      <div class="clearfix"></div>
+    <% total_time = 0 %>
+  <% @batch.trackers.order('start_datetime DESC').each do |tracker| %>
+  <div class="media">
+  <div class="media-body">
+    <h4 class="media-heading"> <%= tracker.start_datetime.strftime("%a %d %b, %Y") %> </h4>
+    <%= tracker.description %><br/>
+     <span class="label label-info"> <%= tracker.start_datetime.strftime("%H-%M") %> to <%= tracker.end_datetime.strftime("%H-%M") %> <strong> (Total:</strong> <%= ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %> hrs)</span>
+   <div class="pull-right"> 
+     <small><%= link_to 'Edit', edit_tracker_path(tracker) %> | <%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></small> 
+     <% total_time +=  ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %>
+    </div>
+
+    </div>
+</div>
+  <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+      <div class="clearfix"> </div>
+      <% @batch.messages.order('created_at DESC').each do |msg| %> 
+    <div class="media">
+  <div class="media-body">
+    <h4 class="media-heading"> <%= msg.created_at.strftime("%a %d %b, %Y") %> </h4>
+    <%= msg.body %><br/>
+     
+   <div class="pull-right"> 
+     <small><%= link_to 'Edit', edit_message_path(msg) %> | <%= link_to 'Destroy', msg, method: :delete, data: { confirm: 'Are you sure?' } %></small> 
+    </div>
+
+    </div>
+</div>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+  </div>
+
+</div>
+  
+
+</div>
+<div class="col-md-5">
+  <div class="page-header">
+    <h2>Tracker</h2>
+    <span class="label label-success">Completed <%= total_time %> hrs</span>
+
+  </div>
+    <%= form_for(@tracker) do |f| %>
+  <% if @tracker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tracker.errors.count, "error") %> prohibited this tracker from being saved:</h2>
+
+      <ul>
+      <% @tracker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.hidden_field :batch_id, value: @batch.id %>
+  <div class="field">
+    <%= f.label :start_datetime %><br>
+    <%= f.datetime_select :start_datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :end_datetime %><br>
+    <%= f.datetime_select :end_datetime %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-default"%>
+  </div>
+<% end %>
+    
+    <div class="page-header">
+    <h2>Students</h2>
+      <ul class="list-group">
+        <% @batch.students.each do |student| %>
+        <li class="list-group-item"><%= student.name %></li>
+        <% end %>
+      </ul>
+  </div>
+  <div class="page-header">
+    <h2>Details</h2>
+  </div>
+  <p>
+  <strong>Start date:</strong>
+    <%= @batch.start_date.strftime("%d %b, %Y") %>
+  </p>
+<p>
+  <strong>End date:</strong>
+  <%= @batch.end_date.strftime("%d %b, %Y") %>
+</p>
+
+<p>
+  <strong>Instruction Type:</strong>
+  <%= @batch.instruction_type %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @batch.description %>
+</p>
+  
+
+<%= link_to 'Edit', edit_batch_path(@batch) %> |
+<%= link_to 'Back', batches_path %>
+</div>  

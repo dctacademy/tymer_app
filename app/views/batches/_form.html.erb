@@ -1,0 +1,54 @@
+<%= form_for(@batch) do |f| %>
+  <% if @batch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
+
+      <ul>
+      <% @batch.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :instruction_type %><br/>
+    <%= f.radio_button :instruction_type, "online" %> Online 
+    <%= f.radio_button :instruction_type, "class_room" %> Classroom
+  </div>
+  
+  <div class="form-group">
+  <%= f.label :description %><br>
+  <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+ <div class="form-group">
+    <label>Select Students:</label>
+    <br/>
+   <% current_user.students.where('student_type = ?', 'enrolled').each do |student| %>
+    <%= check_box_tag "batch[student_ids][]", student.id, @batch.student_ids.include?(student.id), :id => dom_id(student) %>
+    <%= label_tag dom_id(student), student.name %><br/>
+  <% end %>
+</div>
+
+  <div class="form-group">
+    <%= f.label :status %><br>
+    <%= f.check_box :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-default" %> or <%= link_to 'Back', batches_path %>
+  </div>
+<% end %>
