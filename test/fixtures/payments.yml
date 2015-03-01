@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  batch_id: 1
+  student_id: 1
+  payment_date: 2015-03-01
+  payment_type: MyString
+  payment_amount: 1
+  payment_details: MyText
+
+two:
+  batch_id: 1
+  student_id: 1
+  payment_date: 2015-03-01
+  payment_type: MyString
+  payment_amount: 1
+  payment_details: MyText

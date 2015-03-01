@@ -1,0 +1,23 @@
+<h1>Listing student_batches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student_batches.each do |student_batch| %>
+      <tr>
+        <td><%= link_to 'Show', student_batch %></td>
+        <td><%= link_to 'Edit', edit_student_batch_path(student_batch) %></td>
+        <td><%= link_to 'Destroy', student_batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student batch', new_student_batch_path %>

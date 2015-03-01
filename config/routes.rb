@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  resources :payments
+
   resources :messages
+  resources :student_batches
 
   resources :student_notes
 

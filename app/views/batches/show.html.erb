@@ -21,7 +21,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Tracker</a></li>
     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Messages</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Another</a></li>
+    <li role="presentation"><a href="#fees" aria-controls="messages" role="tab" data-toggle="tab">Fees</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -60,7 +60,43 @@
 </div>
       <% end %>
     </div>
-    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+    <div role="tabpanel" class="tab-pane" id="fees">
+      <br/>
+      
+      
+      <strong>Total Fees:</strong>
+      <%= StudentBatch.where('batch_id = ?', @batch.id).sum(:course_fee) %>
+      <br/>
+     
+      
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Details</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @batch.payments.order('payment_date DESC').each do |payment| %>
+      <tr>
+        <td><%= payment.student.name %></td>
+        <td><%= payment.payment_date.strftime("%b %d, %Y") %></td>
+        <td><%= payment.payment_type %></td>
+        <td><%= payment.payment_amount %></td>
+        <td><%= payment.payment_details %></td>
+        <td><%= link_to 'Show', payment %>
+        <%= link_to 'Edit', edit_payment_path(payment) %>
+         <%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    </div>
   </div>
 
 </div>
@@ -68,8 +104,22 @@
 
 </div>
 <div class="col-md-5">
-  <div class="page-header">
-    <h2>Tracker</h2>
+  
+  
+  <div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#tracker" aria-controls="home" role="tab" data-toggle="tab">Tracker</a></li>
+    <li role="presentation"><a href="#students" aria-controls="profile" role="tab" data-toggle="tab">Students</a></li>
+    <li role="presentation"><a href="#details" aria-controls="messages" role="tab" data-toggle="tab">Details</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tracker">
+    <div class="page-header">
+    <h4>Tracker</h4>
     <span class="label label-success">Completed <%= total_time %> hrs</span>
 
   </div>
@@ -104,16 +154,122 @@
   </div>
 <% end %>
     
+    </div>
+    <div role="tabpanel" class="tab-pane" id="students">
     <div class="page-header">
-    <h2>Students</h2>
+      
+      
+    <h4>Students</h4>
       <ul class="list-group">
         <% @batch.students.each do |student| %>
-        <li class="list-group-item"><%= student.name %></li>
+        <% student_batch = StudentBatch.find_by_student_id(student.id) %> 
+        <li class="list-group-item"><%= student.name %>
+        <!-- Button trigger modal -->
+          
+          
+          <% if student_batch.course_fee.nil? %>
+           <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#<%= student_batch.id %>">
+            Add Course Fees
+            </button>
+          <% else %>
+          <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#fee<%= student_batch.id %>">
+            Pay Fees
+          </button>
+          <% end %>
+          
+
+<!-- Modal -->
+<div class="modal fade" id="<%= student_batch.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= student_batch.student.name %></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(student_batch) do |f| %>
+        <%= f.hidden_field :student_id, value: student_batch.student_id %>
+        <%= f.hidden_field :batch_id, value: student_batch.batch_id %>
+       <div class="form-group">
+          <%= f.label :course_fee %><br>
+          <%= f.text_field :course_fee, class: "form-control" %>
+       </div>
+   
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+          
+          
+          <!-- Modal -->
+<div class="modal fade" id="fee<%= student_batch.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= student_batch.student.name %></h4>
+      </div>
+      <div class="modal-body">
+       <%= form_for(@payment) do |f| %>
+  <% if @payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+      <% @payment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ 
+        <%= f.hidden_field :batch_id, value: student_batch.batch_id %>
+
+        <%= f.hidden_field :student_id, value: student_batch.student_id %>
+        
+  <div class="form-group">
+    <%= f.label :payment_date %><br>
+    <%= f.date_select :payment_date %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_type %><br>
+    <%= f.select :payment_type, %w{cash cheque online}, {prompt: "Select"}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_amount %><br>
+    <%= f.text_field :payment_amount, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment_details %><br>
+    <%= f.text_area :payment_details, class: "form-control" %>
+  </div>
+   
+   </div>
+      <div class="modal-footer">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+          
+          
+          
+          
+        
+        </li>
         <% end %>
       </ul>
   </div>
-  <div class="page-header">
-    <h2>Details</h2>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="details">
+    <div class="page-header">
+    <h4>Details</h4>
   </div>
   <p>
   <strong>Start date:</strong>
@@ -137,4 +293,17 @@
 
 <%= link_to 'Edit', edit_batch_path(@batch) %> |
 <%= link_to 'Back', batches_path %>
+    </div>
+  </div>
+
+    <div class="page-header">
+      <h4>Fee Status</h4>
+    </div>
+    <%= pie_chart({"Received" => Payment.where('batch_id = ?', @batch.id).sum(:payment_amount), "Balance" => StudentBatch.where('batch_id = ?', @batch.id).sum(:course_fee) - Payment.where('batch_id = ?', @batch.id).sum(:payment_amount)}) %>
+    
+</div>
+  
+    
+    
+  
 </div>  

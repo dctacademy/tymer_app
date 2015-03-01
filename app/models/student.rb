@@ -1,4 +1,6 @@
 class Student < ActiveRecord::Base
+  has_many :payment_details
+  
   has_many :student_courses
   has_many :courses, through: :student_courses
   

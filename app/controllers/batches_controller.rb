@@ -12,6 +12,7 @@ class BatchesController < ApplicationController
   def show
     @tracker = Tracker.new
     @message = Message.new
+    @payment = Payment.new
     respond_with(@batch)
   end
 

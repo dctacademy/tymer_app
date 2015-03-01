@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216085458) do
+ActiveRecord::Schema.define(version: 20150301041732) do
 
   create_table "batches", force: true do |t|
     t.string   "title"
@@ -40,11 +40,23 @@ ActiveRecord::Schema.define(version: 20150216085458) do
     t.datetime "updated_at"
   end
 
+  create_table "payments", force: true do |t|
+    t.integer  "batch_id"
+    t.integer  "student_id"
+    t.date     "payment_date"
+    t.string   "payment_type"
+    t.integer  "payment_amount"
+    t.text     "payment_details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "student_batches", force: true do |t|
     t.integer  "student_id"
     t.integer  "batch_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_fee"
   end
 
   create_table "student_courses", force: true do |t|
