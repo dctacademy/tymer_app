@@ -8,6 +8,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Course</th>
       <th>Title</th>
       <th>Start date</th>
       <th>End date</th>
@@ -20,6 +21,7 @@
   <tbody>
     <% @batches.each do |batch| %>
       <tr>
+        <td><%= batch.course.name if !batch.course_id.nil? %></td>
         <td><%= batch.title %></td>
         <td><%= batch.start_date %></td>
         <td><%= batch.end_date %></td>

@@ -13,4 +13,11 @@ class Notifications < ActionMailer::Base
     mail_ids = @message.batch.students.pluck(:email)*","
     mail to: "#{mail_ids}", subject: "A message from your trainer"
   end
+  
+  def time_tracker(tracker)
+    @tracker = tracker
+    mail_ids = @tracker.batch.students.pluck(:email)*","
+    mail to: "#{mail_ids}", subject: "Time Tracker -  Course:  #{@tracker.batch.course.name} "
+  end
+  
 end

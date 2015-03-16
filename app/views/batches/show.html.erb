@@ -2,6 +2,9 @@
   <div class="page-header">
     <h2><%= @batch.title %></h2>
      <span class="label label-default"> <%= @batch.status? ? "on going" : "completed" %></span>
+    <% if !@batch.course_id.nil? %>
+    <span class="label label-primary"> <%= @batch.course.name %></span>
+    <% end %>
   </div>
   
   <%= form_for(@message) do |f| %>

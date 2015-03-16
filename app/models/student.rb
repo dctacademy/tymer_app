@@ -12,4 +12,6 @@ class Student < ActiveRecord::Base
   belongs_to :user
   belongs_to :student_source
   validates :name, :mobile, presence: true
+  validates_uniqueness_of :mobile, scope: :user_id
 end
+

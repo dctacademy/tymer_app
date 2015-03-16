@@ -47,6 +47,6 @@ class BatchesController < ApplicationController
     end
 
     def batch_params
-      params.require(:batch).permit(:title, :start_date, :end_date, :user_id, :status, :description, :instruction_type, :student_ids => [])
+      params.require(:batch).permit(:title, :start_date, :end_date, :user_id, :status, :description, :course_id,  :instruction_type, :student_ids => [])
     end
 end

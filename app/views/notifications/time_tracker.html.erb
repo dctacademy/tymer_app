@@ -1,0 +1,35 @@
+<p>Hi, </p>
+
+<table border="1">
+  <caption><%= @tracker.start_datetime.strftime("%a %d %B, %Y") %> </caption>
+    <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Duration</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr>
+        <td><%= @tracker.start_datetime.strftime("%H-%M") %></td>
+        <td><%= @tracker.end_datetime.strftime("%H-%M") %></td>
+        <td><%= ((@tracker.end_datetime - @tracker.start_datetime) / 60 / 60).to_f %> hrs</td>
+        <td><%= @tracker.description %></td>
+    </tbody>
+</table>
+
+        <% total_time = 0 %>
+        <% @tracker.batch.trackers.each do |tracker| %> 
+          <% total_time +=  ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %>
+        <% end %>
+
+<h3>Total hours completed: <%= total_time %> hrs.</h3>
+<br/>
+
+<p>Thank you!</p>
+
+  
+  
+        
