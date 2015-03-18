@@ -1,17 +1,24 @@
+<script type="text/javascript">
+        $(function() {
+        $('.showhide').click(function() {
+        $(".slidediv").slideToggle();
+          });
+        });
+
+      </script>
+     <a href="#" class="showhide btn btn-primary">Tracker Chart</a>
+
 <div class="row">
   <div class="col-md-12">
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Tracker Chart
-</a>
-
-<div class="collapse" id="collapseExample">
-     <% data = {} %>
+     <div class="slidediv" style="width:100%">
+      <% data = {} %>
       <% @batch.trackers.order('start_datetime DESC').each do |tracker| %>
         <% data[:"#{tracker.start_datetime}"] =  ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %> 
       <% end %>
 
       <%= line_chart(data) %> 
-</div>
+  </div>
+
   </div>
 </div>
 
