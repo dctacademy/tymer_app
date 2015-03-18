@@ -1,3 +1,21 @@
+<div class="row">
+  <div class="col-md-12">
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Tracker Chart
+</a>
+
+<div class="collapse" id="collapseExample">
+     <% data = {} %>
+      <% @batch.trackers.order('start_datetime DESC').each do |tracker| %>
+        <% data[:"#{tracker.start_datetime}"] =  ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %> 
+      <% end %>
+
+      <%= line_chart(data) %> 
+</div>
+  </div>
+</div>
+
+<div class="row">
 <div class="col-md-7">
   <div class="page-header">
     <h2><%= @batch.title %></h2>
@@ -6,6 +24,7 @@
     <span class="label label-primary"> <%= @batch.course.name %></span>
     <% end %>
   </div>
+  
   
   <%= form_for(@message) do |f| %>
 
@@ -30,8 +49,9 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
+      
       <div class="clearfix"></div>
-    <% total_time = 0 %>
+      <% total_time = 0 %>
   <% @batch.trackers.order('start_datetime DESC').each do |tracker| %>
   <div class="media">
   <div class="media-body">
@@ -306,7 +326,7 @@
     
 </div>
   
-    
+  </div>
     
   
 </div>  
