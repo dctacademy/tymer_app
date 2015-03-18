@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316142201) do
+ActiveRecord::Schema.define(version: 20150318015023) do
 
   create_table "batches", force: true do |t|
     t.string   "title"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150316142201) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "approved"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

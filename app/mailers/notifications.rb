@@ -20,4 +20,9 @@ class Notifications < ActionMailer::Base
     mail to: "#{mail_ids}", subject: "Time Tracker -  Course:  #{@tracker.batch.course.name} "
   end
   
+  def new_user_waiting_for_approval(user)
+    @user = user
+    mail to: "aniruddha.s.g@gmail.com", subject: "New user registered for tymer app"
+  end
+  
 end
