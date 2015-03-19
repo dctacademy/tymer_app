@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'charts/index'
+
   resources :payments
 
   resources :messages
