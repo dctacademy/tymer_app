@@ -23,9 +23,11 @@
         <% total_time = 0 %>
         <% @tracker.batch.trackers.each do |tracker| %> 
           <% total_time +=  ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %>
+          
         <% end %>
 
-<h3>Total hours completed: <%= total_time %> hrs.</h3>
+<h3>Total hours completed: <%= total_time %> hrs</h3>
+<h3>Total sessions: <%= Tracker.where('batch_id = ?', @tracker.batch_id).count %></h3>
 <br/>
 
 <p>Thank you!</p>
