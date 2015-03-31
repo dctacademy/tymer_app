@@ -150,7 +150,7 @@
     <div role="tabpanel" class="tab-pane active" id="tracker">
     <div class="page-header">
     <h4>Tracker</h4>
-    <span class="label label-success">Completed <%= total_time %> hrs</span>
+      <span class="label label-success">Completed <%= total_time %> hrs in <%= Tracker.where('batch_id = ?', @batch.id).count %> sessions</span>
 
   </div>
     <%= form_for(@tracker) do |f| %>
@@ -205,6 +205,7 @@
             Add Course Fees
             </button>
           <% else %>
+            
           <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#fee<%= student_batch.id %>">
             Pay Fees
           </button>
