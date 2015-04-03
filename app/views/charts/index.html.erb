@@ -1,4 +1,41 @@
 <div class="row">
+  <div class="page-header">
+    <h3>Calendar</h3>
+  </div>
+  
+<script>
+  $(document).ready(function() {
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: "<%= Date.today.strftime('%Y-%m-%d')%>",
+			editable: false,
+			eventLimit: true, // allow "more" link when too many events
+			events: [
+				
+        <% Tracker.all.each do |tracker| %>
+       {
+         title: "<%= tracker.batch.title %>",
+         start: "<%= tracker.start_datetime.to_time.iso8601 %>",
+         end: "<%= tracker.end_datetime.to_time.iso8601 %>",
+        },
+        <% end %>
+			]
+        
+		});
+		
+	});
+
+</script>
+	<div id='calendar'>
+
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-12">
     <div class="page-header">
       <h3>Total Tracker</h3>
