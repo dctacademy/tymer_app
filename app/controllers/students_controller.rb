@@ -6,9 +6,9 @@ class StudentsController < ApplicationController
 
   def index
     @students = current_user.students.where('student_type = ?', 'enrolled')
-    @lead_students = current_user.students.where('student_type = ?', 'lead')
-    @prospective_students = current_user.students.where('student_type = ?', 'prospect')
-    @lost_students = current_user.students.where('student_type = ?', 'lost')
+    @lead_students = current_user.students.where('student_type = ?', 'lead').order('created_at DESC')
+    @prospective_students = current_user.students.where('student_type = ?', 'prospect').order('created_at DESC')
+    @lost_students = current_user.students.where('student_type = ?', 'lost').order('created_at DESC')
     
     respond_with(@students)
   end
