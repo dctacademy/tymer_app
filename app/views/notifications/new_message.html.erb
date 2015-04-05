@@ -1,6 +1,6 @@
 <p>Hi,</p>
 <p>
-  <%= @message.body %>
+  <%= @message.body.html_safe %>
 </p>
 Regards, <br/>
 <%= @message.user.email %>

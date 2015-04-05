@@ -16,7 +16,7 @@
         <td><%= @tracker.start_datetime.strftime("%H-%M") %></td>
         <td><%= @tracker.end_datetime.strftime("%H-%M") %></td>
         <td><%= ((@tracker.end_datetime - @tracker.start_datetime) / 60 / 60).to_f %> hrs</td>
-        <td><%= @tracker.description %></td>
+        <td><%= @tracker.description.html_safe %></td>
     </tbody>
 </table>
 

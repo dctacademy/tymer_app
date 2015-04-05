@@ -125,7 +125,7 @@
   <div class="media">
   <div class="media-body">
     <h4 class="media-heading"> <%= tracker.start_datetime.strftime("%a %d %b, %Y") %> </h4>
-    <%= tracker.description %><br/>
+    <%= tracker.description.html_safe %><br/>
      <span class="label label-info"> <%= tracker.start_datetime.strftime("%H-%M") %> to <%= tracker.end_datetime.strftime("%H-%M") %> <strong> (Total:</strong> <%= ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %> hrs)</span>
    <div class="pull-right"> 
      <small><%= link_to 'Edit', edit_tracker_path(tracker) %> | <%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></small> 
@@ -142,7 +142,7 @@
     <div class="media">
   <div class="media-body">
     <h4 class="media-heading"> <%= msg.created_at.strftime("%a %d %b, %Y") %> </h4>
-    <%= msg.body %><br/>
+    <%= msg.body.html_safe %><br/>
      
    <div class="pull-right"> 
      <small><%= link_to 'Edit', edit_message_path(msg) %> | <%= link_to 'Destroy', msg, method: :delete, data: { confirm: 'Are you sure?' } %></small> 
@@ -236,17 +236,11 @@
     <%= f.label :end_datetime %><br>
     <%= f.datetime_select :end_datetime %>
   </div>
-      
-      <script type="text/javascript">
-         $(function() {
-          $('#texteditor').wysihtml5();
-        });
-        
-     </script>
+     
       
   <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description, class: "form-control", id: "texteditor" %>
+    <%= f.text_area :description, class: "form-control" %>
   </div>
 
   <div class="actions">
@@ -388,7 +382,7 @@
       <tr>
         <td><%= student_batch.course_fee %></td>
         <td><%= student_fees.sum(:payment_amount) %></td>
-        <td><%= student_batch.course_fee - student_fees.sum(:payment_amount) %></td> 
+        <td><%= student_batch.course_fee - student_fees.sum(:payment_amount) if student_batch.course_fee %></td> 
       </tr>
   </tbody>
 </table>

@@ -9,7 +9,7 @@
   <div class="media">
   <div class="media-body">
     <h4 class="media-heading"> <%= note.created_at.strftime("%a %d %b, %Y") %> </h4>
-    <%= note.note %><br/>
+    <%= note.note.html_safe %><br/>
      
    <div class="pull-right"> 
      <small><%= link_to 'Edit', edit_student_note_path(note) %> | <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></small> 
