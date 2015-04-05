@@ -92,16 +92,18 @@
 			defaultDate: "<%= @batch.start_date.strftime('%Y-%m-%d')%>",
 			editable: false,
 			eventLimit: true, // allow "more" link when too many events
+      
 			events: [
 				
         <% @batch.trackers.each do |tracker| %>
        {
-         title: "<%= tracker.description %>",
+         title: "<%= tracker.batch.title %>",
          start: "<%= tracker.start_datetime.to_time.iso8601 %>",
          end: "<%= tracker.end_datetime.to_time.iso8601 %>",
         },
+        
         <% end %>
-			]
+			],
         
 		});
 		
