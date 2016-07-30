@@ -55,6 +55,7 @@
  	 </div>
 	</div>
 </div>
+</div>
 
 <div class="row">
 	<% data = {} 
@@ -80,11 +81,11 @@
 
 	  <!-- Tab panes -->
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2015">
+	    <div role="tabpanel" class="tab-pane active" id="chart2016">
 	    		<%= column_chart(data) %>
 	    </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2015">
+	    <div role="tabpanel" class="tab-pane" id="detail2016">
 				<br/>
 				<% @payments_by_month_2016.each do |month, payments| %>
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
