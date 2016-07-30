@@ -34,20 +34,3 @@
 
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="page-header">
-      <h3>Total Tracker</h3>
-    </div>
-    
-    <% data = {} %>
-    <% tracker = Tracker.all %>
-   
-    <% tracker.each do |tracker| %>
-        <% data[:"#{tracker.start_datetime}"] =  ((tracker.end_datetime - tracker.start_datetime) / 60 / 60).to_f %> 
-      <% end %>
-    
-      <%= line_chart(data) %>
-  </div>
-</div>
