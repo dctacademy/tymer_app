@@ -4,8 +4,10 @@ ActionMailer::Base.smtp_settings = {
    :domain => "formio.in",
    :authentication => "plain",
    :enable_starttls_auto => true,
-   :user_name => "mail@formio.in",
-   :password => "passping123",
+   #:user_name => "mail@formio.in",
+   #:password => "passping123",
+   :user_name => "ani@dctacademy.com",
+   :password => "mag072529",
    :openssl_verify_mode  => 'none'
 }
 
