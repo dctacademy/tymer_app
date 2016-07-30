@@ -40,6 +40,11 @@
     <%= f.label :student_type %><br>
     <%= f.select :student_type, %w{lead prospect enrolled lost},{prompt: "Select"}, {class: "form-control"} %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :temperature %><br>
+    <%= f.select :temperature, %w{hot warm cold},{prompt: "Select"}, {class: "form-control"} %>
+  </div>
   
   <div class="form-group">
     <label>Select Courses:</label>

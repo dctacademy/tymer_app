@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318015023) do
+ActiveRecord::Schema.define(version: 20160730191717) do
 
   create_table "batches", force: true do |t|
     t.string   "title"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20150318015023) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "temperature",       default: "warm"
   end
 
   create_table "trackers", force: true do |t|

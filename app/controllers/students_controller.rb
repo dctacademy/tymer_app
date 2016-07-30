@@ -51,12 +51,12 @@ class StudentsController < ApplicationController
       :current_user => current_user
     }
   end
-  
+
     def set_student
       @student = Student.find(params[:id])
     end
 
     def student_params
-      params.require(:student).permit(:name, :email, :mobile, :about, :learning_style, :student_source_id, :student_type, :user_id, {:course_ids => []})
+      params.require(:student).permit(:name, :email, :mobile, :about, :learning_style, :student_source_id, :temperature, :student_type, :user_id, {:course_ids => []})
     end
 end
