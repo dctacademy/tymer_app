@@ -3,6 +3,7 @@ class BatchesController < ApplicationController
   before_action :set_batch, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
+  before_filter :prepare_exception_notifier
 
   def index
     @batches = current_user.batches
@@ -45,6 +46,13 @@ class BatchesController < ApplicationController
   end
 
   private
+  
+  def prepare_exception_notifier
+    request.env["exception_notifier.exception_data"] = {
+      :current_user => current_user
+    }
+  end
+
     def set_batch
       @batch = Batch.find(params[:id])
     end

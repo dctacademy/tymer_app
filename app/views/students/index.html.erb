@@ -128,7 +128,7 @@
         <td><%= link_to student.name, student %></td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
-        <td><%= student.coures.pluck(:name).join(", ") %></td>
+        <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
