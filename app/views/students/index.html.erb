@@ -63,6 +63,7 @@
       <th>Mobile</th>
       <th>Course</th>
       <th>Source</th>
+      <th>Type</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -75,6 +76,7 @@
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
+        <td><%= student.learning_style %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
@@ -92,6 +94,7 @@
       <th>Mobile</th>
       <th>Course</th>
       <th>Source</th>
+      <th>Type</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -104,6 +107,7 @@
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
+        <td><%= student.learning_style %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
@@ -121,6 +125,7 @@
       <th>Email</th>
       <th>Mobile</th>
       <th>Courses</th>
+      <th>Type</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -132,6 +137,7 @@
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
+        <td><%= student.learning_style %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
