@@ -76,7 +76,7 @@
 
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
-          <% elsif student.temperature == "warm"
+          <% elsif student.temperature == "warm" %>
             <span class="label label-warning"><%= student.temperature %></span>
           <% else %>
             <span class="label label-info"><%= student.temperature %></span>
@@ -116,7 +116,7 @@
         <td><%= link_to student.name, student %> 
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
-          <% elsif student.temperature == "warm"
+          <% elsif student.temperature == "warm"%>
             <span class="label label-warning"><%= student.temperature %></span>
           <% else %>
             <span class="label label-info"><%= student.temperature %></span>
@@ -155,7 +155,7 @@
         <td><%= link_to student.name, student %>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
-          <% elsif student.temperature == "warm"
+          <% elsif student.temperature == "warm" %>
             <span class="label label-warning"><%= student.temperature %></span>
           <% else %>
             <span class="label label-info"><%= student.temperature %></span>
