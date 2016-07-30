@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'report/by_year'
+  get 'report/income'
 
   get 'charts/index'
 
