@@ -4,8 +4,8 @@
 		<h2>Income by Month <small> 2015</small></h2>
 	</div>
 	<% data = {} 
-		income = 0
 		@payments_by_month_2015.each do |month,payments|
+			income = 0
 			payments.each {|payment| income += payment.payment_amount}
 			data[month.strftime("%B")] = income
 		end	
@@ -16,8 +16,9 @@
 		<h2>Income by Month <small> 2016</small></h2>
 	</div>
 	<% data = {} 
-		income = 0
+
 		@payments_by_month_2016.each do |month,payments|
+			income = 0
 			payments.each {|payment| income += payment.payment_amount}
 			data[month.strftime("%B")] = income
 		end	
