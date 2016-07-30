@@ -1,0 +1,29 @@
+
+
+<% @batch_years.each do |year,batches| %>
+
+<div class="page-header">
+	<h2><%= year.year %> <small>Total Batches : <%= batches.size %></small></h2>
+</div>
+<div class="row">
+<% batches.each do |batch| %>
+	<div class="col-md-6">
+		<div class="well">
+			<b><%= batch.title %></b><br/>
+			start date = <%= batch.start_date %><br/>
+			students enrolled = <%= batch.students.size %>
+		</div>
+	</div>
+<% end %>
+</div>
+
+
+<% students = 0 %>
+	<% batches.each do |batch| %>
+		<% students += batch.students.size %>
+	<% end %>
+
+<h4>Total Students : <%= students %></h4>
+
+<% end %>
+

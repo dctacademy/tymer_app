@@ -43,10 +43,13 @@
  <div class="form-group">
     <label>Select Students:</label>
     <br/>
-   <% current_user.students.where('student_type = ?', 'enrolled').each do |student| %>
-    <%= check_box_tag "batch[student_ids][]", student.id, @batch.student_ids.include?(student.id), :id => dom_id(student) %>
-    <%= label_tag dom_id(student), student.name %><br/>
-  <% end %>
+
+  <label>Select Student</label><br/>
+   <%= f.collection_check_boxes :student_ids, current_user.students.where('student_type = ?', 'enrolled'), :id, :name do |b| %>
+        
+        <%= b.check_box %> <%= b.label %><br/>
+   <% end %>
+
 </div>
 
   <div class="form-group">

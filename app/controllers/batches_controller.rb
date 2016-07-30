@@ -27,8 +27,11 @@ class BatchesController < ApplicationController
   def create
     @batch = Batch.new(batch_params)
     @batch.user_id = current_user.id
-    @batch.save
-    respond_with(@batch)
+    if @batch.save
+      redirect_to @batch, notice: "Successfully created"
+    else
+      render action: "new"
+    end
   end
 
   def update
@@ -47,6 +50,6 @@ class BatchesController < ApplicationController
     end
 
     def batch_params
-      params.require(:batch).permit(:title, :start_date, :end_date, :user_id, :status, :description, :course_id,  :instruction_type, :student_ids => [])
+      params[:batch].permit(:title, :start_date, :end_date, :user_id, :status, :description, :course_id,  :instruction_type, :student_ids => [])
     end
 end

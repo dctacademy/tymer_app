@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'report/by_year'
+
   get 'charts/index'
 
   resources :payments
