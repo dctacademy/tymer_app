@@ -10,4 +10,8 @@ class ReportController < ApplicationController
   	@payments_by_month_2015 = @payments_2015.group_by {|payment| payment.payment_date.beginning_of_month}	
   	@payments_by_month_2016 = @payments_2016.group_by {|payment| payment.payment_date.beginning_of_month}	
   end
+
+  def sources
+    @sources = StudentSource.all
+  end
 end

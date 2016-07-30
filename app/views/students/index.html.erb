@@ -59,7 +59,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Mobile</th>
       <th>Course</th>
       <th>Source</th>
@@ -81,7 +80,6 @@
           <% end %>
            <%= link_to student.name, student %>  
         </td>
-        <td><%= student.email %></td>
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
@@ -99,7 +97,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Mobile</th>
       <th>Course</th>
       <th>Source</th>
@@ -121,7 +118,6 @@
           <% end %>
            <%= link_to student.name, student %> 
         </td>
-        <td><%= student.email %></td>
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
@@ -140,7 +136,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Mobile</th>
       <th>Courses</th>
       <th>Type</th>
@@ -161,7 +156,6 @@
           <% end %>
            <%= link_to student.name, student %>
         </td>
-        <td><%= student.email %></td>
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.learning_style %></td>

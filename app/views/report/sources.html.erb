@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="page-header">
+		<h2>Total Enquires</h2>
+	</div>
+		<% data = {} %>
+		<% @sources.each do |source| %>
+			<% data[source.name] = source.students.size %>
+		<% end %>
+		<%= column_chart(data) %>
+</div>
+
+<div class="row">
+	<div class="page-header">
+		<h2>Total Conversion</h2>
+	</div>
+		<% @sources.each do |source| %>
+		<div class="col-md-4">
+			<h4><%= source.name %></h4>
+			<% data = {} %>
+				<% 
+					data["enrolled"] = source.students.where('student_type = ?', "enrolled").size
+					data["lead"] = source.students.where('student_type = ?', "lead") 
+					data["prospect"] = source.students.where('student_type = ?', "prospect").size
+					data["lost"] = source.students.where('student_type = ?', "lost").size
+				%>
+				<%= pie_chart(data) %>
+			</div>
+		<% end %>
+
+	</div>
