@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.2'
 gem 'devise', '3.3.0'
+gem 'exception_notification'
 #gem 'wysihtml5n-rails'
 gem 'groupdate'
 # Use sqlite3 as the database for Active Record

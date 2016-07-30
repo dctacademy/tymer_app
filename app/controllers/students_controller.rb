@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_filter :prepare_exception_notifier
 
   respond_to :html
 
@@ -44,6 +45,13 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def prepare_exception_notifier
+    request.env["exception_notifier.exception_data"] = {
+      :current_user => current_user
+    }
+  end
+  
     def set_student
       @student = Student.find(params[:id])
     end
