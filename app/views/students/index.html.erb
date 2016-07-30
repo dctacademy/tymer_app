@@ -72,8 +72,6 @@
     <% @lead_students.each do |student| %>
       <tr>
         <td>
-          <%= link_to student.name, student %> 
-
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
           <% elsif student.temperature == "warm" %>
@@ -81,7 +79,7 @@
           <% else %>
             <span class="label label-info"><%= student.temperature %></span>
           <% end %>
-
+           <%= link_to student.name, student %>  
         </td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
@@ -113,7 +111,7 @@
   <tbody>
     <% @prospective_students.each do |student| %>
       <tr>
-        <td><%= link_to student.name, student %> 
+        <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
           <% elsif student.temperature == "warm"%>
@@ -121,6 +119,7 @@
           <% else %>
             <span class="label label-info"><%= student.temperature %></span>
           <% end %>
+           <%= link_to student.name, student %> 
         </td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
@@ -152,7 +151,7 @@
   <tbody>
     <% @lost_students.each do |student| %>
       <tr>
-        <td><%= link_to student.name, student %>
+        <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
           <% elsif student.temperature == "warm" %>
@@ -160,6 +159,7 @@
           <% else %>
             <span class="label label-info"><%= student.temperature %></span>
           <% end %>
+           <%= link_to student.name, student %>
         </td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
