@@ -1,54 +1,61 @@
-<div class="col-md-8">
+<div class="col-md-12">
   <div class="page-header">
     <h2>Your students</h2>
   </div>
 
- 
+  <script>
+    $(document).ready(function(){
+      $('#enrolledStudents').DataTable();
+      $('#leadStudents').DataTable();
+      $('#prospectStudents').DataTable();
+      $('#lostStudents').DataTable();
+    });
+ </script>
+
 <div role="tabpanel">
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Enrolled</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Lead</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Prospect</a></li>
-    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Lost</a></li>
+    <li role="presentation" class="active"><a href="#enrolled" aria-controls="home" role="tab" data-toggle="tab">Enrolled</a></li>
+    <li role="presentation"><a href="#lead" aria-controls="profile" role="tab" data-toggle="tab">Lead</a></li>
+    <li role="presentation"><a href="#prospect" aria-controls="messages" role="tab" data-toggle="tab">Prospect</a></li>
+    <li role="presentation"><a href="#lost" aria-controls="settings" role="tab" data-toggle="tab">Lost</a></li>
   </ul>
+
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
-    <table class="table table-striped">
+    <div role="tabpanel" class="tab-pane active" id="enrolled">
+  <br/>
+  
+    <table class="table table-striped" id="enrolledStudents">
   <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
       <th>Mobile</th>
       <th>Course</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= link_to student.name, student %></td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
-        <td><% student.courses.each do |course| %>
-          <%= course.name %> 
-          <% end %>
-        </td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= student.courses.pluck(:name).join(", ") %></td>
+         
       </tr>
     <% end %>
   </tbody>
 </table>
    
     </div>
-    <div role="tabpanel" class="tab-pane" id="profile">
-     <table class="table table-striped">
+    <div role="tabpanel" class="tab-pane" id="lead">
+    <br/>
+
+     <table class="table table-striped" id="leadStudents">
   <thead>
     <tr>
       <th>Name</th>
@@ -56,24 +63,17 @@
       <th>Mobile</th>
       <th>Course</th>
       <th>Created</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @lead_students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= link_to student.name, student %></td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
-        <td><% student.courses.each do |course| %>
-          <%= course.name %> 
-          <% end %>
-        </td>
+        <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -81,8 +81,9 @@
     
     
     </div>
-    <div role="tabpanel" class="tab-pane" id="messages">
-     <table class="table table-striped">
+    <div role="tabpanel" class="tab-pane" id="prospect">
+    <br/>
+     <table class="table table-striped" id="prospectStudents">
   <thead>
     <tr>
       <th>Name</th>
@@ -90,24 +91,17 @@
       <th>Mobile</th>
       <th>Course</th>
       <th>Created</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @prospective_students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= link_to student.name, student %></td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
-        <td><% student.courses.each do |course| %>
-          <%= course.name %> 
-          <% end %>
-        </td>
+        <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -115,9 +109,9 @@
     
     
     </div>
-    <div role="tabpanel" class="tab-pane" id="settings">
-    
-     <table class="table table-striped">
+    <div role="tabpanel" class="tab-pane" id="lost">
+    <br/>
+     <table class="table table-striped" id="lostStudents">
   <thead>
     <tr>
       <th>Name</th>
@@ -125,24 +119,17 @@
       <th>Mobile</th>
       <th>Courses</th>
       <th>Created</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @lost_students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= link_to student.name, student %></td>
         <td><%= student.email %></td>
         <td><%= student.mobile %></td>
-        <td><% student.courses.each do |course| %>
-          <%= course.name %> 
-          <% end %>
-        </td>
+        <td><%= student.coures.pluck(:name).join(", ") %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
