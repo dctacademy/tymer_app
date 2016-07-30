@@ -11,19 +11,35 @@
 <% max_batch_size = batches.first.students.size %>
 <% min_batch_size = batches.first.students.size %>
 <% total_income = 0 %>
-
+<% max_income = batches.first.payments.sum(:payment_amount) %>
+<% min_income = batches.first.payments.sum(:payment_amount) %>
+	<% batches.sort_by! {|batch| batch.start_date} %>
 	<% batches.each do |batch| %>
+
+
 		<% students += batch.students.size
 			 total_income += batch.payments.sum(:payment_amount) 
 		 %>
-
+	
 		<% if batch.students.size > max_batch_size 
 				max_batch_size = batch.students.size 
-		end %>
+			 end 
 
-		<% if batch.students.size < min_batch_size 
-			min_batch_size = batch.students.size 
-			end %>
+			 batch_payment = batch.payments.sum(:payment_amount)
+
+			 if batch_payment > max_income
+			 	max_income = batch_payment
+			 end
+
+			 	if batch.students.size < min_batch_size 
+					min_batch_size = batch.students.size 
+				end 
+
+				if batch_payment < min_income
+					min_income = batch_payment
+				end
+
+			%>
 
 	<% end %>
 
@@ -32,6 +48,9 @@
 	 Total Batches : <%= batches.size %><br/>
 	 Total Students : <%= students %> <br/>
 	 Total Amount : INR <%= total_income %><br/>
+	 Maximum Income : INR <%= max_income %><br/>
+	 Minimum Income : INR <%= min_income %><br/>
+	 Average Income : INR <%= (total_income / batches.size).round %><br/>
 	 Maximum Batch Size : <%= max_batch_size %><br/>
 	 Minimum Batch Size : <%= min_batch_size %><br/>
 	 Average Batch Size : <%= (students/batches.size).round %></b>
@@ -43,7 +62,7 @@
 	<div class="col-md-6">
 		<div class="well">
 			<b><%= link_to batch.title, batch_path(batch.id), target: "_blank" %></b><br/>
-			<b>Start date</b> : <%= batch.start_date %><br/>
+			<b>Start date</b> : <%= batch.start_date.strftime("%d, %B %Y") %><br/>
 			<b>Students enrolled</b> : <%= batch.students.size %><br/>
 			<b>Income</b> : INR <%= batch.payments.sum(:payment_amount) %><br/>
 		</div>
