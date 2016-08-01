@@ -230,11 +230,11 @@
     <%= f.hidden_field :batch_id, value: @batch.id %>
   <div class="field">
     <%= f.label :start_datetime %><br>
-    <%= f.datetime_select :start_datetime %>
+    <%= f.datetime_select :start_datetime, order: [:day,:month,:year], minute_step: 15 %>
   </div>
   <div class="field">
     <%= f.label :end_datetime %><br>
-    <%= f.datetime_select :end_datetime %>
+    <%= f.datetime_select :end_datetime, order: [:day,:month,:year], minute_step: 15 %>
   </div>
      
       

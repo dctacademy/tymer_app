@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @activity.student_id %>
+</p>
+
+<p>
+  <strong>Activity type:</strong>
+  <%= @activity.activity_type_id %>
+</p>
+
+<p>
+  <strong>Activity datetime:</strong>
+  <%= @activity.activity_datetime %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @activity.user_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @activity.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @activity.description %>
+</p>
+
+<p>
+  <strong>Is completed:</strong>
+  <%= @activity.is_completed %>
+</p>
+
+<p>
+  <strong>Completed on:</strong>
+  <%= @activity.completed_on %>
+</p>
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>

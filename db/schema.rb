@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730191717) do
+ActiveRecord::Schema.define(version: 20160731170527) do
+
+  create_table "activities", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "activity_type_id"
+    t.datetime "activity_datetime"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "is_completed"
+    t.datetime "completed_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "batches", force: true do |t|
     t.string   "title"

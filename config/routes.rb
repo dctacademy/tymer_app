@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :activities
+
+  resources :activity_types
+
   get 'report/by_year'
   get 'report/income'
   get 'report/sources'
