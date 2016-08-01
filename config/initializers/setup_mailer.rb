@@ -6,8 +6,10 @@ ActionMailer::Base.smtp_settings = {
    :enable_starttls_auto => true,
    #:user_name => "mail@formio.in",
    #:password => "passping123",
-   :user_name => "ani@dctacademy.com",
-   :password => "mag072529",
+   #:user_name => "ani@dctacademy.com",
+   #:password => "mag072529",
+   :user_name => "aniruddha.s.g@gmail.com",
+   :password => "passhost123",
    :openssl_verify_mode  => 'none'
 }
 
