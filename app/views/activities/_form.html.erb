@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= f.label :student_id %><br>
-    <%= f.collection_select :student_id, Student.all, :id, :name, {prompt: "Select Student"}, {class: "form-control"} %>
+    <%= f.collection_select :student_id, Student.order('name'), :id, :status, {prompt: "Select Student"}, {class: "form-control"} %>
   </div>
   <div class="form-group">
     <%= f.label :activity_type_id %><br>

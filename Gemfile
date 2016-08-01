@@ -5,11 +5,13 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.2'
 gem 'devise', '3.3.0'
 gem 'exception_notification'
+gem 'rails_12factor'
 #gem 'wysihtml5n-rails'
 gem 'groupdate'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
+gem 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets

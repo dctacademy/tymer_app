@@ -13,5 +13,10 @@ class Student < ActiveRecord::Base
   belongs_to :student_source
   validates :name, :mobile, presence: true
   validates_uniqueness_of :mobile, scope: :user_id
+
+
+  def status
+    "#{self.name} - #{self.mobile} - #{self.student_type} - #{self.temperature}"
+  end
 end
 
