@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Batch:</strong>
+  <%= @batch_assignment.batch_id %>
+</p>
+
+<p>
+  <strong>Assignment:</strong>
+  <%= @batch_assignment.assignment_id %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @batch_assignment.due_date %>
+</p>
+
+<%= link_to 'Edit', edit_batch_assignment_path(@batch_assignment) %> |
+<%= link_to 'Back', batch_assignments_path %>

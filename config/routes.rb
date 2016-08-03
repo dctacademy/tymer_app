@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  resources :batch_assignments
+
+  get 'chapters/filter_chapters'
+  resources :assignments
+
+  resources :chapters
+
+  resources :topics
+
   resources :activities
 
   resources :activity_types

@@ -19,6 +19,14 @@ class Notifications < ActionMailer::Base
     mail_ids = @tracker.batch.students.pluck(:email)*","
     mail to: "#{mail_ids}", subject: "Time Tracker -  Course:  #{@tracker.batch.course.name} "
   end
+
+  def send_assignment(batch_assignment, batch, assignment)
+    @batch_assignment = batch_assignment
+    @batch = batch
+    @assignment = assignment
+    student_email_ids = batch.students.pluck(:email).join(",")
+    mail to: "#{student_email_ids}", subject: "New Assignment - #{assignment.name}"
+  end
   
   def new_user_waiting_for_approval(user)
     @user = user

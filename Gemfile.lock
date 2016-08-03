@@ -53,9 +53,6 @@ GEM
       activesupport (>= 3)
     hike (1.2.3)
     i18n (0.7.0)
-    jbuilder (2.6.0)
-      activesupport (>= 3.0.0, < 5.1)
-      multi_json (~> 1.2)
     jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -66,9 +63,12 @@ GEM
     mime-types (1.25.1)
     minitest (5.9.0)
     multi_json (1.12.1)
+    nested_form (0.3.2)
     orm_adapter (0.5.0)
     pg (0.18.4)
     polyglot (0.3.5)
+    rabl (0.11.6)
+      activesupport (>= 2.3.14)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -139,9 +139,10 @@ DEPENDENCIES
   devise (= 3.3.0)
   exception_notification
   groupdate
-  jbuilder (~> 2.0)
   jquery-rails
+  nested_form
   pg
+  rabl
   rails (= 4.1.2)
   rails_12factor
   sass-rails (~> 4.0.3)

@@ -1,0 +1,10 @@
+<p>Hi,</p>
+<p>
+  <%= @assignment.description.html_safe %>
+
+  <br/>
+  <b>This assignment is due on <%= @batch_assignment.due_date.strftime("%A %d %B %Y @ %I:%M %p") %></b>
+</p>
+Regards, <br/>
+Aniruddha SG <br/>
+<%= image_tag("http://www.dctacademy.com/wp-content/uploads/2016/03/dct-final.jpg") %>

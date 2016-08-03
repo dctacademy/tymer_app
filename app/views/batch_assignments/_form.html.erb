@@ -1,0 +1,29 @@
+<%= form_for(@batch_assignment) do |f| %>
+  <% if @batch_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@batch_assignment.errors.count, "error") %> prohibited this batch_assignment from being saved:</h2>
+
+      <ul>
+      <% @batch_assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :batch_id %><br>
+    <%= f.number_field :batch_id %>
+  </div>
+  <div class="field">
+    <%= f.label :assignment_id %><br>
+    <%= f.number_field :assignment_id %>
+  </div>
+  <div class="field">
+    <%= f.label :due_date %><br>
+    <%= f.datetime_select :due_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

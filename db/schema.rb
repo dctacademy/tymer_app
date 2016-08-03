@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731170527) do
+ActiveRecord::Schema.define(version: 20160803142625) do
 
   create_table "activities", force: true do |t|
     t.integer  "student_id"
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20160731170527) do
     t.datetime "updated_at"
   end
 
+  create_table "assignments", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "topic_id"
+    t.integer  "chapter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "batch_assignments", force: true do |t|
+    t.integer  "batch_id"
+    t.integer  "assignment_id"
+    t.datetime "due_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "batches", force: true do |t|
     t.string   "title"
     t.date     "start_date"
@@ -43,6 +60,20 @@ ActiveRecord::Schema.define(version: 20160731170527) do
     t.text     "description"
     t.string   "instruction_type"
     t.integer  "course_id"
+  end
+
+  create_table "chapters", force: true do |t|
+    t.string   "name"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "course_topics", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "courses", force: true do |t|
@@ -114,6 +145,12 @@ ActiveRecord::Schema.define(version: 20160731170527) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "temperature",       default: "warm"
+  end
+
+  create_table "topics", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "trackers", force: true do |t|

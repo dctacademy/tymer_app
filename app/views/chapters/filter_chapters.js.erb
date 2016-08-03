@@ -1,0 +1,4 @@
+$('#assignment_chapter_id').empty();
+<% for chapter in @chapters %>
+$('#assignment_chapter_id').append($("<option></option>").attr("value",<%= chapter.id %>).text('<%= chapter.name %>'));
+<% end %>

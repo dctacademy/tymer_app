@@ -19,7 +19,7 @@
   <tbody>
     <% @activities.each do |activity| %>
       <tr>
-        <td><%= activity.activity_datetime %></td>
+        <td><%= activity.activity_datetime.strftime("%A, %b %d %y %H:%M") %></td>
         <td><%= activity.student.try(:name) %></td>
         <td><%= activity.activity_type.try(:name) %></td>
         <td><%= activity.title %></td>
