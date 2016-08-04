@@ -8,6 +8,9 @@ class Student < ActiveRecord::Base
   
   has_many :student_batches
   has_many :batches, through: :student_batches
+
+  has_many :student_assignments
+  has_many :batch_assignments, through: :student_assignments
   
   belongs_to :user
   belongs_to :student_source

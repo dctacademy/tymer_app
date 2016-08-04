@@ -49,6 +49,6 @@ class BatchAssignmentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def batch_assignment_params
-      params.require(:batch_assignment).permit(:batch_id, :assignment_id, :due_date)
+      params.require(:batch_assignment).permit(:batch_id, :assignment_id, :due_date, student_ids:[])
     end
 end

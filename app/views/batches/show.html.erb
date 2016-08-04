@@ -1,12 +1,19 @@
   <script type="text/javascript">
-        $(function() {
-          
-        $('.showhide').click(function() {
-        $(".slidediv").slideToggle();
-          });
+    $(function() 
+    {
+      $('.showhide').click(function() {
+      $(".slidediv").slideToggle();
         });
+    });
 
-      </script>
+      function toggle(source) {
+        checkboxes = document.getElementsByName('batch_assignment[student_ids][]');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+       }
+    }
+
+  </script>
      <a href="#" class="showhide btn btn-primary">Tracker Chart</a>
 
 <div class="row">
@@ -89,7 +96,7 @@
                             </div>
                             <div class="modal-body">
                               <%= raw(assignment.description) %>
-                                
+                              <hr>
                               <b class="text-success" id="success_<%= assignment.id %>"></b>
 
                               <% unless BatchAssignment.where('batch_id = ?', @batch.id).pluck(:assignment_id).include? assignment.id %>
@@ -102,23 +109,95 @@
                                         <%= f.label :due_date %><br>
                                         <%= f.datetime_select :due_date, order: [:day, :month, :year], minute_step: 15 %>
                                       </div>
+      
+                                       <h4>Select Students</h4>
+                                       <input type="checkbox" id="selectAll" onClick="toggle(this)" /> <b>Select All</b><br/>
+                                        <%= f.collection_check_boxes :student_ids, @batch.students, :id, :name do |s| %>
+                                          
+                                          <%= s.check_box %> <%= s.label %>
+                                          <br/>
+
+                                        <% end %>
 
                                       <div class="actions">
                                         <%= f.submit "submit", class: "btn btn-default" %>
                                       </div>
+                            
                                     <% end %>
                                     <% else %>
                                       <b class="text-info"> This assignment is already given on 
                                       <%= (BatchAssignment.where('batch_id = ? AND assignment_id = ?', @batch.id, assignment.id)).first.created_at.strftime("%A %d %B %Y") %>
                                       </b>
-                                      
                               <% end %>
-
                             </div>
                             
                           </div>
                         </div>
-                      </div>
+                      </div><!-- modal ends -->
+
+                      <button type="button" class="btn btn-link btn-sm pull-right" data-toggle="modal" data-target="#submission_<%= assignment.id%>">
+                        submission
+                      </button>
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="submission_<%= assignment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    
+                               <% 
+                              batch_assignment = BatchAssignment.where('batch_id = ? AND assignment_id = ?', @batch.id, assignment.id).first
+
+                             %>
+
+
+                              <h4 class="modal-title" id="myModalLabel"><%= assignment.name %> due on <%= batch_assignment.due_date.strftime("%A %d %B %Y @ %I:%M %p") if !batch_assignment.nil?%></h4>
+                            </div>
+                            <div class="modal-body">
+                            
+                             <% if batch_assignment.nil? %> 
+                              Assignment not given yet. 
+                             <% else %>
+                              <% students_not_submitted = StudentAssignment.where('batch_assignment_id = ? AND checked = ?', batch_assignment.id, false)
+
+                               students_submitted = StudentAssignment.where('batch_assignment_id = ? AND checked = ?', batch_assignment.id, true)
+                              %>
+                              
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <h5>Not Submitted</h5>
+                                  <ul id="notSubmitted">
+                                    <% students_not_submitted.each do |student| %>
+                                      <li id="stu_ass_<%= student.id %>"><%= student.student.name %>
+                                      <%= link_to "checked", student_assignments_checked_path(ass_id: student.id), remote: true %>
+
+                                      </li>
+                                    <% end %>
+                                  </ul>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <h5>Submitted</h5>
+                                  <ul id="submitted">
+                                    <% students_submitted.each do |student| %>
+                                      <li><%= student.student.name %> on <%= student.submitted_on %></li>
+                                    <% end %>
+                                  </ul>
+                                </div>
+                              </div>
+
+                              <hr>
+                              <%= raw(assignment.description) %>
+
+                             <% end %>
+                             
+                            </div>
+                          </div>
+                        </div>
+                      </div><!-- modal ends -->
+                      
+                      
                   </li>
                <% end %>
                </ul>

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'student_assignments/checked'
+  resources :student_assignments
+
   resources :batch_assignments
 
   get 'chapters/filter_chapters'

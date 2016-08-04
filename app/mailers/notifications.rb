@@ -24,7 +24,7 @@ class Notifications < ActionMailer::Base
     @batch_assignment = batch_assignment
     @batch = batch
     @assignment = assignment
-    student_email_ids = batch.students.pluck(:email).join(",")
+    student_email_ids = batch_assignment.students.pluck(:email).join(",")
     mail to: "#{student_email_ids}", subject: "New Assignment - #{assignment.name}"
   end
   

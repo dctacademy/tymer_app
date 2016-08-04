@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803142625) do
+ActiveRecord::Schema.define(version: 20160803181421) do
 
   create_table "activities", force: true do |t|
     t.integer  "student_id"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 20160803142625) do
     t.text     "payment_details"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "student_assignments", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "batch_assignment_id"
+    t.datetime "submitted_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "checked",             default: false
   end
 
   create_table "student_batches", force: true do |t|

@@ -13,7 +13,7 @@
       <th>Start date</th>
       <th>End date</th>
       <th>hours - sessions</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -31,8 +31,6 @@
         <% end %>
         <td><%= total_time %> - <%= Tracker.where('batch_id = ?', batch.id).count %></td>
         <td><%= link_to 'Show', batch %></td>
-        <td><%= link_to 'Edit', edit_batch_path(batch) %></td>
-        <td><%= link_to 'Destroy', batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
