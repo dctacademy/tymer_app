@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
     @lead_students = current_user.students.where('student_type = ?', 'lead').order('created_at DESC')
     @prospective_students = current_user.students.where('student_type = ?', 'prospect').order('created_at DESC')
     @lost_students = current_user.students.where('student_type = ?', 'lost').order('created_at DESC')
-    
+    @workshop_colleges = current_user.students.where('learning_style = ?', 'workshop')
     respond_with(@students)
   end
 

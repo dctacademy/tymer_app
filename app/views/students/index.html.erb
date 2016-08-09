@@ -20,6 +20,7 @@
     <li role="presentation"><a href="#lead" aria-controls="profile" role="tab" data-toggle="tab">Lead</a></li>
     <li role="presentation"><a href="#prospect" aria-controls="messages" role="tab" data-toggle="tab">Prospect</a></li>
     <li role="presentation"><a href="#lost" aria-controls="settings" role="tab" data-toggle="tab">Lost</a></li>
+    <li role="presentation"><a href="#workshop" aria-controls="settings" role="tab" data-toggle="tab">Workshop</a></li>
   </ul>
 
 
@@ -108,6 +109,46 @@
 
   <tbody>
     <% @prospective_students.each do |student| %>
+      <tr>
+        <td>
+          <% if student.temperature == "hot" %>
+            <span class="label label-danger"><%= student.temperature %></span>
+          <% elsif student.temperature == "warm"%>
+            <span class="label label-warning"><%= student.temperature %></span>
+          <% else %>
+            <span class="label label-info"><%= student.temperature %></span>
+          <% end %>
+           <%= link_to student.name, student %> 
+        </td>
+        <td><%= student.mobile %></td>
+        <td><%= student.courses.pluck(:name).join(", ") %></td>
+        <td><%= student.student_source.try(:name) %></td>
+        <td><%= student.learning_style %></td>
+        <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    
+    
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="workshop">
+    <br/>
+     <table class="table table-striped" id="workshop">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>Course</th>
+      <th>Source</th>
+      <th>Type</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workshop_colleges.each do |student| %>
       <tr>
         <td>
           <% if student.temperature == "hot" %>

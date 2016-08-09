@@ -14,9 +14,15 @@ class Student < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :student_source
-  validates :name, :mobile, presence: true
+  validates :name, presence: true
   validates_uniqueness_of :mobile, scope: :user_id
-
+  validate :check_mobile
+  
+  def check_mobile
+    unless self.learning_style == 'workshop'
+      errors.add(:mobile, "needs to be present")
+    end
+  end
 
   def status
     "#{self.name} - #{self.mobile} - #{self.student_type} - #{self.temperature}"
