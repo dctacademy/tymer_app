@@ -5,6 +5,9 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.all
+    @overdue_activities = Activity.where('is_completed = ? AND activity_datetime < ?', false, Date.today).order('activity_datetime')
+    @incomplete_activities = Activity.where('is_completed = ? AND activity_datetime >= ?', false, Date.today).order('activity_datetime')
+    @completed_activities = Activity.where('is_completed = ?', true).order('activity_datetime')
   end
 
   # GET /activities/1

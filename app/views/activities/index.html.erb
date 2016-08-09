@@ -1,3 +1,4 @@
+<%= link_to 'New Activity', new_activity_path, class: "btn btn-primary" %>
 <div class="row">
   <div class="col-md-12">
   
@@ -51,40 +52,83 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">
-   <br/><br/>
+
+<div class="col-md-4">
+  <div class="page-header text-center">
+    <h3>Over Due</h3>
+  </div>
+
 <table class="table">
   <thead>
     <tr>
       <th>Datetime</th>
       <th>Student</th>
-      <th>Activity type</th>
-      <th>Title</th>
-      <th></th>
+      <th>Type</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.activity_datetime.strftime("%A, %b %d %y %H:%M") %></td>
-        <td><%= activity.student.try(:name) %></td>
-        <td><%= activity.activity_type.try(:name) %></td>
-        <td><%= activity.title %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @overdue_activities.each do |activity| %>
+    <tr>
+      <td><%= activity.activity_datetime.strftime("%a, %b %d %y %H:%M") %></td>
+      <td><%= activity.student.try(:name) %></td>
+      <td><%= activity.activity_type.try(:name) %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
-
-  </div>
-
-  <div class="col-md-4">
-
-  </div>
 </div>
-<br>
 
-<%= link_to 'New Activity', new_activity_path, class: "btn btn-primary" %>
+<div class="col-md-4">
+  <div class="page-header text-center">
+    <h3>Incomplete</h3>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Datetime</th>
+      <th>Student</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @incomplete_activities.each do |activity| %>
+    <tr>
+      <td><%= activity.activity_datetime.strftime("%a, %b %d %y %H:%M") %></td>
+      <td><%= activity.student.try(:name) %></td>
+      <td><%= activity.activity_type.try(:name) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+<div class="col-md-4">
+  <div class="page-header text-center">
+    <h3>Completed</h3>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Datetime</th>
+      <th>Student</th>
+      <th>Type</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @completed_activities.each do |activity| %>
+    <tr>
+      <td><%= activity.activity_datetime.strftime("%a, %b %d %y %H:%M") %></td>
+      <td><%= activity.student.try(:name) %></td>
+      <td><%= activity.activity_type.try(:name) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+
