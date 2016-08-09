@@ -1,23 +1,22 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Student:</strong>
-  <%= @activity.student_id %>
+  <%= link_to @activity.student.try(:name), student_path(@activity.student_id) %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @activity.student.try(:mobile) %>
 </p>
 
 <p>
   <strong>Activity type:</strong>
-  <%= @activity.activity_type_id %>
+  <%= @activity.activity_type.try(:name) %>
 </p>
 
 <p>
   <strong>Activity datetime:</strong>
   <%= @activity.activity_datetime %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @activity.user_id %>
 </p>
 
 <p>

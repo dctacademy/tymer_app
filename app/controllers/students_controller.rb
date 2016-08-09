@@ -16,6 +16,7 @@ class StudentsController < ApplicationController
 
   def show
     @student_note = StudentNote.new
+    @activities = @student.activities
     respond_with(@student)
   end
 

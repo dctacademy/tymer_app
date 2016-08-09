@@ -1,9 +1,58 @@
 <div class="row">
-  <div class="col-md-8">
-    <div class="page-header">
-      <h2>Listing Activities</h2>
-    </div>
+  <div class="col-md-12">
+  
+  <div class="page-header">
+    <h2>Listing Activities</h2>
+  </div>
+
+  <script>
+  $(document).ready(function() {
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      //defaultDate: "<%# @activities.activity_datetime.strftime('%Y-%m-%d')%>",
+      editable: false,
+      eventLimit: true, // allow "more" link when too many events
       
+      events: [
+        
+        <% @activities.each do |activity| %>
+       {
+         title: "<%= activity.student.name %> - <%= activity.activity_type.try(:name) %>",
+         start: "<%= activity.activity_datetime.to_time.iso8601 %>",
+         //end: "<%# tracker.end_datetime.to_time.iso8601 %>",
+         url: '<%= "/activities/#{activity.id}"%>', 
+         <% if activity.activity_datetime < Date.today && activity.is_completed == false %>
+             color: 'red'
+         <% elsif activity.is_completed == true %>
+            color: 'green'
+          <% else %>
+            color: 'blue'
+         <% end %>
+        },
+        <% end %>
+
+      ],
+
+        
+    });
+    
+  });
+
+ </script>
+  <div id='calendar'>
+
+  </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+   <br/><br/>
 <table class="table">
   <thead>
     <tr>
@@ -11,7 +60,6 @@
       <th>Student</th>
       <th>Activity type</th>
       <th>Title</th>
-      <th>Description</th>
       <th></th>
     </tr>
   </thead>
@@ -23,7 +71,6 @@
         <td><%= activity.student.try(:name) %></td>
         <td><%= activity.activity_type.try(:name) %></td>
         <td><%= activity.title %></td>
-        <td><%= truncate(activity.description, length: 25) %></td>
         <td><%= link_to 'Show', activity %></td>
         <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
         <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
