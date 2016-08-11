@@ -19,7 +19,7 @@ class Student < ActiveRecord::Base
   validates :name, presence: true
   #validates_uniqueness_of :mobile, scope: :user_id
   validates_length_of :mobile, is: 10, allow_blank: true
-  validate :check_mobile
+  #validate :check_mobile
   
   def check_mobile
     unless self.learning_style == 'workshop'
