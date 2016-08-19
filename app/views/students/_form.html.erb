@@ -33,6 +33,13 @@
     <%= f.radio_button :learning_style, "online" %> Online
     <%= f.radio_button :learning_style, "workshop" %> Workshop
   </div>
+
+    <div class="form-group">
+      <%= f.label :batch_type %><br>
+      <%= f.radio_button :batch_type, "weekdays" %> Weekdays
+      <%= f.radio_button :learning_style, "weekends" %> Weekends
+   </div>
+
   <div class="form-group">
     <%= f.label :student_source_id %><br>
     <%= f.collection_select :student_source_id, current_user.student_sources, :id, :name, {prompt: "Select"}, {class: "form-control"} %>

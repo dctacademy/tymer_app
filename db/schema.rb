@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803181421) do
+ActiveRecord::Schema.define(version: 20160819095524) do
 
   create_table "activities", force: true do |t|
     t.integer  "student_id"
@@ -69,6 +69,13 @@ ActiveRecord::Schema.define(version: 20160803181421) do
     t.datetime "updated_at"
   end
 
+  create_table "cities", force: true do |t|
+    t.integer  "state_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "course_topics", force: true do |t|
     t.integer  "course_id"
     t.integer  "topic_id"
@@ -98,6 +105,12 @@ ActiveRecord::Schema.define(version: 20160803181421) do
     t.string   "payment_type"
     t.integer  "payment_amount"
     t.text     "payment_details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "states", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -154,6 +167,7 @@ ActiveRecord::Schema.define(version: 20160803181421) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "temperature",       default: "warm"
+    t.string   "batch_type"
   end
 
   create_table "topics", force: true do |t|

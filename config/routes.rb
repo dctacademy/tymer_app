@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :cities
+
+  resources :states
+
   get 'student_assignments/checked'
   resources :student_assignments
 
