@@ -30,5 +30,10 @@ class Student < ActiveRecord::Base
   def status
     "#{self.name} - #{self.mobile} - #{self.student_type} - #{self.temperature}"
   end
+
+  def selection_type
+    "#{self.batch_type} - #{self.learning_style}"
+  end
+
 end
 
