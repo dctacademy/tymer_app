@@ -65,14 +65,14 @@
       <th>Course</th>
       <th>Source</th>
       <th>Type</th>
-      <th>Created</th>
       <th></th>
+      <th>Created</th>
     </tr>
   </thead>
 
   <tbody>
     <% @lead_students.each do |student| %>
-      <tr id="lead_<%= student.id %>">
+      <tr id="student_<%= student.id %>">
         <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
@@ -87,20 +87,34 @@
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
         <td><%= student.selection_type %></td>
-        <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
-        <td><!-- Single button -->
-          <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Mark As <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Prospect", students_update_status_path(student_id: student.id, status: "prospect" ), remote: true %></li>
-              <li><%= link_to "Lost", students_update_status_path(student_id: student.id, status: "lost"), remote: true %></li>
-            </ul>
-          </div>
-        </td>
+        <td>
 
-        
+            <a class="btn btn-link btn-sm" role="button" data-toggle="collapse" href="#mark_<%= student.id %>" aria-expanded="false">
+              Mark
+            </a>
+    
+            <div class="collapse" id="mark_<%= student.id %>">
+              <div class="well">
+                <%= form_tag students_update_status_path, remote: true, method: :get do %>
+              <%= hidden_field_tag "student_id", student.id %>
+            <div class="form-group">
+              <label>Status</label><br/>
+              <%= radio_button_tag :status, "prospect" %> Prospect
+              <%= radio_button_tag :status, "lost" %> Lost 
+            </div>
+
+            <div class="form-group">
+              <label>Temperature</label><br/>
+              <%= radio_button_tag :temperature, "warm" %> Warm
+              <%= radio_button_tag :temperature, "cold" %> Cold
+            </div>
+              <%= submit_tag "update", class: "btn btn-primary btn-sm" %>
+            
+            <% end %>
+              </div>
+            </div>
+        </td>
+        <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -117,13 +131,14 @@
       <th>Course</th>
       <th>Source</th>
       <th>Type</th>
+      <th></th>
       <th>Created</th>
     </tr>
   </thead>
 
   <tbody>
     <% @prospective_students.each do |student| %>
-      <tr>
+      <tr id="student_<%= student.id %>">
         <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
@@ -138,6 +153,34 @@
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
         <td><%= student.selection_type %></td>
+        <td>
+
+            <a class="btn btn-link btn-sm" role="button" data-toggle="collapse" href="#mark_<%= student.id %>" aria-expanded="false">
+              Mark
+            </a>
+    
+            <div class="collapse" id="mark_<%= student.id %>">
+              <div class="well">
+                <%= form_tag students_update_status_path, remote: true, method: :get do %>
+              <%= hidden_field_tag "student_id", student.id %>
+            <div class="form-group">
+              <label>Status</label><br/>
+              <%= radio_button_tag :status, "lead" %> Lead
+              <%= radio_button_tag :status, "lost" %> Lost 
+            </div>
+
+            <div class="form-group">
+              <label>Temperature</label><br/>
+              <%= radio_button_tag :temperature, "hot" %> Hot
+              <%= radio_button_tag :temperature, "warm" %> Warm
+              <%= radio_button_tag :temperature, "cold" %> Cold
+            </div>
+              <%= submit_tag "update", class: "btn btn-primary btn-sm" %>
+            
+            <% end %>
+              </div>
+            </div>
+        </td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
@@ -157,13 +200,14 @@
       <th>Course</th>
       <th>Source</th>
       <th>Type</th>
+      <th></th>
       <th>Created</th>
     </tr>
   </thead>
 
   <tbody>
     <% @workshop_colleges.each do |student| %>
-      <tr>
+      <tr id="student_<%= student.id %>">
         <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
@@ -178,6 +222,34 @@
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.student_source.try(:name) %></td>
         <td><%= student.selection_type %></td>
+         <td>
+
+            <a class="btn btn-link btn-sm" role="button" data-toggle="collapse" href="#mark_<%= student.id %>" aria-expanded="false">
+              Mark
+            </a>
+    
+            <div class="collapse" id="mark_<%= student.id %>">
+              <div class="well">
+                <%= form_tag students_update_status_path, remote: true, method: :get do %>
+              <%= hidden_field_tag "student_id", student.id %>
+            <div class="form-group">
+              <label>Status</label><br/>
+              <%= radio_button_tag :status, "lead" %> Lead
+              <%= radio_button_tag :status, "prospect" %> Prospect 
+            </div>
+
+            <div class="form-group">
+              <label>Temperature</label><br/>
+              <%= radio_button_tag :temperature, "hot" %> Hot
+              <%= radio_button_tag :temperature, "warm" %> Warm
+              <%= radio_button_tag :temperature, "cold" %> Cold
+            </div>
+              <%= submit_tag "update", class: "btn btn-primary btn-sm" %>
+            
+            <% end %>
+              </div>
+            </div>
+        </td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
@@ -195,13 +267,14 @@
       <th>Mobile</th>
       <th>Courses</th>
       <th>Type</th>
+      <th></th>
       <th>Created</th>
     </tr>
   </thead>
 
   <tbody>
     <% @lost_students.each do |student| %>
-      <tr>
+      <tr id="student_<%= student.id %>">
         <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
@@ -215,6 +288,34 @@
         <td><%= student.mobile %></td>
         <td><%= student.courses.pluck(:name).join(", ") %></td>
         <td><%= student.selection_type %></td>
+         <td>
+
+            <a class="btn btn-link btn-sm" role="button" data-toggle="collapse" href="#mark_<%= student.id %>" aria-expanded="false">
+              Mark
+            </a>
+    
+            <div class="collapse" id="mark_<%= student.id %>">
+              <div class="well">
+                <%= form_tag students_update_status_path, remote: true, method: :get do %>
+              <%= hidden_field_tag "student_id", student.id %>
+            <div class="form-group">
+              <label>Status</label><br/>
+              <%= radio_button_tag :status, "lead" %> Lead
+              <%= radio_button_tag :status, "prospect" %> Prospect 
+            </div>
+
+            <div class="form-group">
+              <label>Temperature</label><br/>
+              <%= radio_button_tag :temperature, "hot" %> Hot
+              <%= radio_button_tag :temperature, "warm" %> Warm
+              <%= radio_button_tag :temperature, "cold" %> Cold
+            </div>
+              <%= submit_tag "update", class: "btn btn-primary btn-sm" %>
+            
+            <% end %>
+              </div>
+            </div>
+        </td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>

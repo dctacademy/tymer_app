@@ -47,7 +47,7 @@ class StudentsController < ApplicationController
 
   def update_status
     @student = Student.find(params[:student_id])
-    @student.update_attributes(student_type: params[:status])
+    @student.update_attributes(student_type: params[:status], temperature: params[:temperature])
   end
 
   private
