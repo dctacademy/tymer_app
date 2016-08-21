@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'students/update_status'
+
   resources :cities
 
   resources :states

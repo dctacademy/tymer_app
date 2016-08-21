@@ -45,6 +45,11 @@ class StudentsController < ApplicationController
     respond_with(@student)
   end
 
+  def update_status
+    @student = Student.find(params[:student_id])
+    @student.update_attributes(student_type: params[:status])
+  end
+
   private
 
   def prepare_exception_notifier

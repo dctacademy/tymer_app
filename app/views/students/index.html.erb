@@ -66,12 +66,13 @@
       <th>Source</th>
       <th>Type</th>
       <th>Created</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @lead_students.each do |student| %>
-      <tr>
+      <tr id="lead_<%= student.id %>">
         <td>
           <% if student.temperature == "hot" %>
             <span class="label label-danger"><%= student.temperature %></span>
@@ -87,6 +88,19 @@
         <td><%= student.student_source.try(:name) %></td>
         <td><%= student.selection_type %></td>
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
+        <td><!-- Single button -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mark As <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Prospect", students_update_status_path(student_id: student.id, status: "prospect" ), remote: true %></li>
+              <li><%= link_to "Lost", students_update_status_path(student_id: student.id, status: "lost"), remote: true %></li>
+            </ul>
+          </div>
+        </td>
+
+        
       </tr>
     <% end %>
   </tbody>
