@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819095524) do
+ActiveRecord::Schema.define(version: 20160822050225) do
 
   create_table "activities", force: true do |t|
     t.integer  "student_id"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20160819095524) do
     t.datetime "updated_at"
     t.string   "temperature",       default: "warm"
     t.string   "batch_type"
+    t.string   "mac_address"
   end
 
   create_table "topics", force: true do |t|
