@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  resources :jobs
+
+  resources :job_sources
+
+  resources :company_contacts
+
+  resources :companies
+
+  resources :technologies
+
+  resources :technology_categories
+
+  resources :company_sources
+
   get 'students/update_status'
 
   resources :cities

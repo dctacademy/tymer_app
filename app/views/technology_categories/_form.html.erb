@@ -1,0 +1,23 @@
+<%= form_for(@technology_category) do |f| %>
+  <% if @technology_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@technology_category.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @technology_category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-default" %> or <%= link_to 'Back', technology_categories_path %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<%= form_for(@company_source) do |f| %>
+  <% if @company_source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@company_source.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @company_source.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-default" %> or <%= link_to 'Back', company_sources_path %>
+  </div>
+<% end %>

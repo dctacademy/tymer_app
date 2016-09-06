@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-8">
+  <div class="page-header">
+    <h2><%= @state.name %></h2>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @state.name %>
-</p>
 
 <%= link_to 'Edit', edit_state_path(@state) %> |
 <%= link_to 'Back', states_path %>
+</div>

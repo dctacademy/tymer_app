@@ -1,14 +1,12 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-8">
+  <div class="page-header">
+    <h2><%= @city.name %></h2>
+  </div>
 
 <p>
-  <strong>State:</strong>
-  <%= @city.state_id %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @city.name %>
+	<b>State</b> : <%= @city.state.name %>
 </p>
 
 <%= link_to 'Edit', edit_city_path(@city) %> |
 <%= link_to 'Back', cities_path %>
+</div>

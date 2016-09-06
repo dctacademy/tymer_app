@@ -1,0 +1,29 @@
+<div class="col-md-8">
+  <div class="page-header">
+    <h2>Listing Technology Categories</h2>
+  </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @technology_categories.each do |technology_category| %>
+      <tr>
+        <td><%= technology_category.name %></td>
+        <td><%= link_to 'Show', technology_category %></td>
+        <td><%= link_to 'Edit', edit_technology_category_path(technology_category) %></td>
+        <td><%= link_to 'Destroy', technology_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Technology Category', new_technology_category_path, class: "btn btn-primary" %>
+</div>

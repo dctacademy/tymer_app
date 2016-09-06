@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822050225) do
+ActiveRecord::Schema.define(version: 20160823075235) do
 
   create_table "activities", force: true do |t|
     t.integer  "student_id"
@@ -76,6 +76,34 @@ ActiveRecord::Schema.define(version: 20160822050225) do
     t.datetime "updated_at"
   end
 
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "address"
+    t.string   "website"
+    t.string   "company_type"
+    t.integer  "company_source_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "state_id"
+    t.integer  "city_id"
+  end
+
+  create_table "company_contacts", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "mobile"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_sources", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "course_topics", force: true do |t|
     t.integer  "course_id"
     t.integer  "topic_id"
@@ -86,6 +114,32 @@ ActiveRecord::Schema.define(version: 20160822050225) do
   create_table "courses", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "job_sources", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "job_technologies", force: true do |t|
+    t.integer  "job_id"
+    t.integer  "technology_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jobs", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.date     "posted_date"
+    t.integer  "company_id"
+    t.integer  "min_ex"
+    t.integer  "max_ex"
+    t.integer  "job_source_id"
+    t.string   "job_link"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,6 +223,19 @@ ActiveRecord::Schema.define(version: 20160822050225) do
     t.string   "temperature",       default: "warm"
     t.string   "batch_type"
     t.string   "mac_address"
+  end
+
+  create_table "technologies", force: true do |t|
+    t.string   "name"
+    t.integer  "technology_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "technology_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "topics", force: true do |t|

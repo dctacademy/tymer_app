@@ -1,0 +1,2 @@
+module TechnologyCategoriesHelper
+end
