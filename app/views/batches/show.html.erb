@@ -303,55 +303,59 @@
     <div role="tabpanel" class="tab-pane" id="fees">
       <br/>
       
+  <div class="col-md-9">
+
+      <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Details</th>
+          <th></th>
+        </tr>
+      </thead>
       
-      <strong>Total Fees:</strong>
+      <% fee_received = 0 %> 
+      <tbody>
+        <% @batch.payments.order('payment_date DESC').each do |payment| %>
+          <tr>
+            <td><%= payment.student.name %></td>
+            <td><%= payment.payment_date.strftime("%b %d, %Y") %></td>
+            <td><%= payment.payment_type %></td>
+            <td><%= payment.payment_amount %></td>
+            <td><%= payment.payment_details %></td>
+            <td><%= link_to 'Show', payment %>
+            <%= link_to 'Edit', edit_payment_path(payment) %>
+             <%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% fee_received += payment.payment_amount %> 
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+    <div class="col-md-3">
+
+      <strong>Total:</strong>
       <% total_fee = StudentBatch.where('batch_id = ?', @batch.id).sum(:course_fee) %>
-      INR <%= total_fee %>
+      <%= total_fee %>
       <br/>
-     
       
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Student</th>
-      <th>Date</th>
-      <th>Type</th>
-      <th>Amount</th>
-      <th>Details</th>
-      <th></th>
-    </tr>
-  </thead>
-  
-  <% fee_received = 0 %> 
-  <tbody>
-    <% @batch.payments.order('payment_date DESC').each do |payment| %>
-      <tr>
-        <td><%= payment.student.name %></td>
-        <td><%= payment.payment_date.strftime("%b %d, %Y") %></td>
-        <td><%= payment.payment_type %></td>
-        <td><%= payment.payment_amount %></td>
-        <td><%= payment.payment_details %></td>
-        <td><%= link_to 'Show', payment %>
-        <%= link_to 'Edit', edit_payment_path(payment) %>
-         <%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% fee_received += payment.payment_amount %> 
-    <% end %>
-  </tbody>
-</table>
-
-      <strong>Fee Received:</strong>
-      INR <%= fee_received %>
+      <strong>Received:</strong>
+      <%= fee_received %>
       <br/>
 
-      <strong>Fee Balance:</strong>
-      INR <%= total_fee - fee_received %>
+      <strong>Balance:</strong>
+      <%= total_fee - fee_received %>
       <br/>
-     
+
+    </div>
 
     </div>
   </div>
-
 </div>
   
 
