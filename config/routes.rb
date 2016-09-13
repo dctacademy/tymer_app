@@ -59,7 +59,7 @@ Rails.application.routes.draw do
 
   resources :courses
 
-  devise_for :users
+  devise_for :users, skip: [:registrations]
   get 'dashboard/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
