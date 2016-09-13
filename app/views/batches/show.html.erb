@@ -305,7 +305,8 @@
       
       
       <strong>Total Fees:</strong>
-      <%= StudentBatch.where('batch_id = ?', @batch.id).sum(:course_fee) %>
+      <% total_fee = StudentBatch.where('batch_id = ?', @batch.id).sum(:course_fee) %>
+      INR <%= total_fee %>
       <br/>
      
       
@@ -320,7 +321,8 @@
       <th></th>
     </tr>
   </thead>
-
+  
+  <% fee_received = 0 %> 
   <tbody>
     <% @batch.payments.order('payment_date DESC').each do |payment| %>
       <tr>
@@ -333,9 +335,20 @@
         <%= link_to 'Edit', edit_payment_path(payment) %>
          <%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% fee_received += payment.payment_amount %> 
     <% end %>
   </tbody>
 </table>
+
+      <strong>Fee Received:</strong>
+      INR <%= fee_received %>
+      <br/>
+
+      <strong>Fee Balance:</strong>
+      INR <%= total_fee - fee_received %>
+      <br/>
+     
+
     </div>
   </div>
 
