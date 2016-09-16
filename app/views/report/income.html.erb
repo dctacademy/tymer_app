@@ -25,7 +25,11 @@
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="chart2015">
 	    		<br/>
-	    		<%= column_chart(data) %>
+	    		<%= column_chart(data, library: {
+	    				title: "Income for 2015", 
+	    				is3D: true
+
+	    			}) %>
 	    </div>
 
 	    <div role="tabpanel" class="tab-pane" id="detail2015">
@@ -86,7 +90,10 @@
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="chart2016">
 	    		<br/>
-	    		<%= column_chart(data) %>
+	    		<%= column_chart(data, library: {
+	    				title: "Income for 2016"
+
+	    			}) %>
 	    </div>
 
 	    <div role="tabpanel" class="tab-pane" id="detail2016">
@@ -118,5 +125,7 @@
 	  </div>
 	</div><!-- Tab ends-->
 </div>
+
+
 
 
