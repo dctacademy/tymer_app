@@ -1,0 +1,41 @@
+<h1>Listing profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Dob</th>
+      <th>Blood group</th>
+      <th>Permanent address</th>
+      <th>Current address</th>
+      <th>Emergency contact</th>
+      <th>From</th>
+      <th>College</th>
+      <th>Stream</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profiles.each do |profile| %>
+      <tr>
+        <td><%= profile.student_id %></td>
+        <td><%= profile.dob %></td>
+        <td><%= profile.blood_group %></td>
+        <td><%= profile.permanent_address %></td>
+        <td><%= profile.current_address %></td>
+        <td><%= profile.emergency_contact %></td>
+        <td><%= profile.from %></td>
+        <td><%= profile.college %></td>
+        <td><%= profile.stream %></td>
+        <td><%= link_to 'Show', profile %></td>
+        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Profile', new_profile_path %>

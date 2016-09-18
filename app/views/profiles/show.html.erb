@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @profile.student_id %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @profile.dob %>
+</p>
+
+<p>
+  <strong>Blood group:</strong>
+  <%= @profile.blood_group %>
+</p>
+
+<p>
+  <strong>Permanent address:</strong>
+  <%= @profile.permanent_address %>
+</p>
+
+<p>
+  <strong>Current address:</strong>
+  <%= @profile.current_address %>
+</p>
+
+<p>
+  <strong>Emergency contact:</strong>
+  <%= @profile.emergency_contact %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @profile.from %>
+</p>
+
+<p>
+  <strong>College:</strong>
+  <%= @profile.college %>
+</p>
+
+<p>
+  <strong>Stream:</strong>
+  <%= @profile.stream %>
+</p>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

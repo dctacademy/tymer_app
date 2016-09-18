@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823075235) do
+ActiveRecord::Schema.define(version: 20160918182417) do
 
   create_table "activities", force: true do |t|
     t.integer  "student_id"
@@ -159,6 +159,20 @@ ActiveRecord::Schema.define(version: 20160823075235) do
     t.string   "payment_type"
     t.integer  "payment_amount"
     t.text     "payment_details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.integer  "student_id"
+    t.date     "dob"
+    t.string   "blood_group"
+    t.text     "permanent_address"
+    t.text     "current_address"
+    t.string   "emergency_contact"
+    t.string   "from"
+    t.string   "college"
+    t.string   "stream"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

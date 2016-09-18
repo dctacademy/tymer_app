@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_id: 1
+  dob: 2016-09-18
+  blood_group: MyString
+  permanent_address: MyText
+  current_address: MyText
+  emergency_contact: MyString
+  from: MyString
+  college: MyString
+  stream: MyString
+
+two:
+  student_id: 1
+  dob: 2016-09-18
+  blood_group: MyString
+  permanent_address: MyText
+  current_address: MyText
+  emergency_contact: MyString
+  from: MyString
+  college: MyString
+  stream: MyString

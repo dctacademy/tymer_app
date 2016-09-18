@@ -22,6 +22,7 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
+    @profile = @student.build_profile
     respond_with(@student)
   end
 
@@ -63,6 +64,6 @@ class StudentsController < ApplicationController
     end
 
     def student_params
-      params.require(:student).permit(:name, :email, :mobile, :about, :learning_style, :student_source_id, :temperature, :student_type, :batch_type, :mac_address,:user_id, {:course_ids => []})
+      params.require(:student).permit(:name, :email, :mobile, :about, :learning_style, :student_source_id, :temperature, :student_type, :batch_type, :mac_address,:user_id, {:course_ids => []}, profile_attributes: [:dob, :blood_group, :permanent_address, :current_address, :emergency_contact, :from, :college, :stream])
     end
 end

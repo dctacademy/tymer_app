@@ -32,12 +32,14 @@
     <%= f.radio_button :learning_style, "class_room" %> Class Room
     <%= f.radio_button :learning_style, "online" %> Online
     <%= f.radio_button :learning_style, "workshop" %> Workshop
+    <%= f.radio_button :learning_style, "corporate_training" %> Corporate Training
   </div>
 
     <div class="form-group">
       <%= f.label :batch_type %><br>
       <%= f.radio_button :batch_type, "weekdays" %> Weekdays
       <%= f.radio_button :batch_type, "weekends" %> Weekends
+      <%= f.radio_button :batch_type, "crash_course" %> Crash Course
    </div>
 
   <div class="form-group">
@@ -68,7 +70,73 @@
     <%= f.text_field :mac_address, class: "form-control" %>
   </div>
 
+  <% if @student.profile.nil? %>
+    <input type="checkbox" name="profile" id="profile"> <b>Add Profile Details</b>
+  <% else %>
+    <input type="checkbox" checked name="profile" id="profile"> <b>Profile Details</b>
+  <% end %>
+
+
+  <div id="profileDetails" style="display: none">
+
+    <%= f.fields_for :profile do |profile| %>
+    <div class="field">
+    <%= profile.label :dob %><br>
+    <%= profile.date_select :dob %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :blood_group %><br>
+    <%= profile.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-"], {prompt: "Select"}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :permanent_address %><br>
+    <%= profile.text_area :permanent_address %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :current_address %><br>
+    <%= profile.text_area :current_address %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :emergency_contact %><br>
+    <%= profile.text_field :emergency_contact, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :from %><br>
+    <%= profile.text_field :from, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :college %><br>
+    <%= profile.text_field :college, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= profile.label :stream %><br>
+    <%= profile.text_field :stream, class: "form-control" %>
+  </div>
+    <% end %>
+
+  </div>  
+
   <div class="actions"> 
     <%= f.submit "Submit", class: "btn btn-default" %> or <%= link_to 'Back', students_path %>
   </div>
+  
+
 <% end %>
+
+<script>
+var profileBox = document.getElementById('profile');
+
+if(profileBox.checked){
+  profileDetails = document.getElementById('profileDetails');
+  profileDetails.style = "display: true";
+};
+
+profileBox.onclick = function(){
+  profileDetails = document.getElementById('profileDetails');
+  if(profileBox.checked){
+    profileDetails.style = "display: true";
+  }else{
+    profileDetails.style = "display: none"
+  };
+};
+</script>

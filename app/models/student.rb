@@ -13,6 +13,8 @@ class Student < ActiveRecord::Base
   has_many :batch_assignments, through: :student_assignments
 
   has_many :activities
+
+  has_one :profile
   
   belongs_to :user
   belongs_to :student_source
@@ -20,7 +22,7 @@ class Student < ActiveRecord::Base
   #validates_uniqueness_of :mobile, scope: :user_id
   validates_length_of :mobile, is: 10, allow_blank: true
   #validate :check_mobile
-  
+  accepts_nested_attributes_for :profile
   def check_mobile
     unless self.learning_style == 'workshop'
       errors.add(:mobile, "needs to be present")
