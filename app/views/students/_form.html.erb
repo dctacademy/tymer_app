@@ -70,19 +70,20 @@
     <%= f.text_field :mac_address, class: "form-control" %>
   </div>
 
-  <% if @student.profile.nil? %>
+  <% if @student.id.nil? %>
     <input type="checkbox" name="profile" id="profile"> <b>Add Profile Details</b>
   <% else %>
-    <input type="checkbox" checked name="profile" id="profile"> <b>Profile Details</b>
+    <input type="checkbox" checked="checked" name="profile" id="profile"> <b>Profile Details</b>
   <% end %>
-
+  
+  <br/>
 
   <div id="profileDetails" style="display: none">
 
     <%= f.fields_for :profile do |profile| %>
     <div class="field">
     <%= profile.label :dob %><br>
-    <%= profile.date_select :dob %>
+    <%= profile.date_select :dob, include_blank: true, order: [:day, :month, :year], start_year: 1970 %>
   </div>
   <div class="form-group">
     <%= profile.label :blood_group %><br>
@@ -124,12 +125,13 @@
 <% end %>
 
 <script>
-var profileBox = document.getElementById('profile');
 
+var profileBox = document.getElementById('profile');
+var profileDetails = document.getElementById('profileDetails');
 if(profileBox.checked){
-  profileDetails = document.getElementById('profileDetails');
   profileDetails.style = "display: true";
-};
+};  
+
 
 profileBox.onclick = function(){
   profileDetails = document.getElementById('profileDetails');
