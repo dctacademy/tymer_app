@@ -1,0 +1,41 @@
+<div class="col-md-8">
+  <div class="page-header">
+    <h2>Listing Users</h2>
+  </div>
+
+<script>
+    $(document).ready(function(){
+      $('#users').DataTable();
+    });
+ </script>
+
+<table class="table table-striped" id="users">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Access</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+            <% profile = Profile.find_by_user_id(user.id) %>
+        <td><%= profile.nil? ? "admin" : profile.student.name  %>
+        <td><%= user.email %></td>
+        <td>
+        <%= user.approved %> 
+        <% unless user.approved %>
+          <%= link_to "Approve", user_path(user.id), data: {method: :patch, confirm: "Are you sure you want to enable login?"} %>
+        <% end %>
+        </td>
+        <td><%= user.user_type %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>

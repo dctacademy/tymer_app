@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :batches
   has_many :tracker
   has_many :messages
-  
+  has_one :profile
   after_create :send_admin_mail
   def send_admin_mail
     Notifications.new_user_waiting_for_approval(self).deliver!

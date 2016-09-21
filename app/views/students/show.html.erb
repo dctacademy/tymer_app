@@ -92,7 +92,11 @@
 <% end %>
   
   <div class="page-header">
-    <h3>Personal details</h3>
+    <h3>Details 
+    <small>
+        <%= link_to 'Edit', edit_student_path(@student) %> |<%= link_to 'Back', students_path %>
+    </small>
+    </h3>
   </div>
   <p>
   <strong>Email:</strong>
@@ -133,9 +137,16 @@
   <strong>Mac Address:</strong>
   <%= @student.mac_address %>
 </p>
-  
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+
+<% if @student.student_type == "enrolled" %>
+  <% if (@student.profile.nil?) || @student.profile.user_id == nil  %>
+     <%= link_to "Create Account", users_path(student_id: @student.id), method: :post, class: "btn btn-success" %>
+  <% else %>
+     <%= link_to "Delete Account", user_path(@student.id),data: { method: :delete, confirm: "Are you sure?"}, class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+  <br/>
+
 
 </div>
 

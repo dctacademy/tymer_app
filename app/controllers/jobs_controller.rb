@@ -24,7 +24,7 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
 
     if @job.save
-      redirect_to @job, notice: 'Job was successfully created.'
+      redirect_to company_path(@job.company_id), notice: 'Job was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   def update
     if @job.update(job_params)
-      redirect_to @job, notice: 'Job was successfully updated.'
+      redirect_to company_path(@job.company_id), notice: 'Job was successfully updated.'
     else
       render :edit
     end
@@ -53,6 +53,6 @@ class JobsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:title, :description, :posted_date, :company_id, :min_ex, :max_ex, :job_source_id, :job_link)
+      params.require(:job).permit(:title, :description, :posted_date, :company_id, :min_ex, :max_ex, :job_source_id, :job_link, job_technologies:[])
     end
 end

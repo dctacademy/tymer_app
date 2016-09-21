@@ -8,6 +8,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1
   def show
+    @job = Job.new
   end
 
   # GET /companies/new
@@ -53,6 +54,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_params
-      params.require(:company).permit(:name, :description, :address, :website, :company_type, :company_source_id)
+      params.require(:company).permit(:name, :description, :address, :website, :company_type, :company_source_id,:state_id, :city_id,  company_contacts_attributes: [:id, :name, :email, :mobile, :_destroy])
     end
 end

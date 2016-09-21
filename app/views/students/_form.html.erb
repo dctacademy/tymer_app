@@ -70,7 +70,7 @@
     <%= f.text_field :mac_address, class: "form-control" %>
   </div>
 
-  <% if @student.id.nil? %>
+  <% if @student.profile.nil? %>
     <input type="checkbox" name="profile" id="profile"> <b>Add Profile Details</b>
   <% else %>
     <input type="checkbox" checked="checked" name="profile" id="profile"> <b>Profile Details</b>

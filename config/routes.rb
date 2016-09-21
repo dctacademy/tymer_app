@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :student_dashboard do 
+    get 'dashboard/index'
+  end
+
+  scope '/admin' do 
+    resources :users 
+  end
+
   resources :profiles
 
   resources :jobs

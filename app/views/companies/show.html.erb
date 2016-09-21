@@ -1,44 +1,124 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-12">
+  <div class="page-header">
+    <h2><%= @company.name %> <br/>
+      <small> 
+        <%= link_to @company.website, "http://#{@company.website}", target: "_blank" %> | <%= @company.company_type %> employees | <%= @company.state.name %> | <%= @company.city.name %>  ( <%= @company.company_source.try(:name) %> ) 
+      </small> 
+    </h2>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+<div class="col-md-9">
+  <% @company.jobs.each do |job| %>
+  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#<%= job.id %>" aria-expanded="false" aria-controls="collapseExample">
+  <%= job.title %>
+</a>
 
-<p>
-  <strong>Description:</strong>
-  <%= @company.description %>
-</p>
+<div class="collapse" id="<%= job.id %>">
+  <div class="well">
+    <%= job.description.html_safe %><br/>
+    <hr/>
+    <b><%= job.technologies.pluck(:name).join(", ") %></b>
+    <br/>
+    <%= job.posted_date %><br/>
 
-<p>
-  <strong>Address:</strong>
-  <%= @company.address %>
-</p>
+    <%= job.min_ex %> - <%= job.max_ex %> <br/>
+    <%# job.job_source.try(:name) %> <br/>
+    <%= link_to "Read More", "http://#{job.job_link}" , target: "_blank" %>
+  </div>
+</div>
+<% end %>
 
-<p>
-  <strong>Website:</strong>
-  <%= @company.website %>
-</p>
+</div>
 
-<p>
-  <strong>Company type:</strong>
-  <%= @company.company_type %>
-</p>
+<div class="col-md-3">
+  
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#job">
+ Add Job
+</button>
+<br/><br/><br/>
+<!-- Modal -->
+<div class="modal fade" id="job" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@job) do |f| %>
+  <% if @job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
 
-<p>
-  <strong>Company source:</strong>
-  <%= @company.company_source_id %>
-</p>
+      <ul>
+      <% @job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<p>
-  <strong>State:</strong>
-  <%= @company.state.name %>
-</p>
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
 
-<p>
-  <strong>City:</strong>
-  <%= @company.city.name %>
-</p>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :technologies %><br>
+    <%= f.collection_check_boxes :technology_ids, Technology.all, :id, :name do |b|  %>
+      <%= b.check_box %> <%= b.label %> 
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :posted_date %><br>
+    <%= f.date_select :posted_date, order: [:day, :month, :year] %>
+  </div>
+ 
+    <%= f.hidden_field :company_id, value: @company.id %>
+
+  <div class="form-group">
+    <%= f.label :min_ex %><br>
+    <%= f.number_field :min_ex, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :max_ex %><br>
+    <%= f.number_field :max_ex, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :job_source_id %><br>
+    <%= f.collection_select :job_source_id,JobSource.all, :id, :name, {prompt: "Select"}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :job_link %><br>
+    <%= f.text_field :job_link, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <% @company.company_contacts.each do |contact| %>
+    <div class="well">
+      <b>Name: <%= contact.name %></b><br/>
+      <b>Mobile: <%= contact.mobile %></b><br/>
+      <b>Email: <%= contact.email %></b><br/>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
+
+

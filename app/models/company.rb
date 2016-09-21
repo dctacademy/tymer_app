@@ -7,4 +7,5 @@ class Company < ActiveRecord::Base
 	belongs_to :city
 
 	validates :name, {presence: true, uniqueness: true}
+	accepts_nested_attributes_for :company_contacts, allow_destroy: true
 end
