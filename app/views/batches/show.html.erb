@@ -421,7 +421,7 @@
     <h4>Students</h4>
       <ul class="list-group">
         <% @batch.students.each do |student| %>
-        <% student_batch = StudentBatch.find_by_student_id(student.id) %> 
+        <% student_batch = StudentBatch.find_by_student_id_and_batch_id(student.id, @batch.id) %> 
         <li class="list-group-item">
           
           
@@ -534,7 +534,7 @@
      
         
         <table class="table">
-          <caption>Fees Overview</caption>
+          <caption>Fees Overview (<%= link_to "edit fee", edit_student_batch_path(student_batch.id) %>)</caption>
   <thead>
     <tr>
       <th>Course Fees</th>
@@ -580,6 +580,7 @@
   </tbody>
 </table>
         
+
         
       </div>
     </div>
