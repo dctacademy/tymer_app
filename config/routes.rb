@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :solutions
+
   namespace :student_dashboard do 
     get 'dashboard/index'
   end

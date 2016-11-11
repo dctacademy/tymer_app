@@ -1,17 +1,56 @@
-<div class="col-md-8">
-  <div class="page-header">
-    <h2><%= @assignment.name %></h2>
+<div class="row">
+	<div class="col-md-5">
+	  <div class="page-header">
+	    <h2><%= @assignment.name %></h2>
+	  </div>
+
+	  <div class="well">
+			<p><%= raw(@assignment.description) %></p>
+
+
+		<b><%= @assignment.level %>, <%= link_to @assignment.chapter.try(:name), chapter_path(@assignment.chapter_id) %> , <%= link_to @assignment.topic.try(:name), topic_path(@assignment.topic_id) %></b>
+	  </div>
+		
+	<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
+	<%= link_to 'Back', assignments_path %>
+
+	</div>
+
+		<div class="col-md-7">
+		<div class="page-header">
+	    <h2>Solutions
+				<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal"> Add </button>
+			</h2>
+	  </div>
+	 	<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Solution</h4>
+      </div>
+      <div class="modal-body">
+      <% @solution = Solution.new %>
+      	<%= render '/solutions/form' %>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="well">
-		<p><%= raw(@assignment.description) %></p>
+	<% @assignment.solutions.each do |solution| %>
+	<div class="well">
+		<code>
+			<%= raw(solution.body) %>
 
-	<b><%= link_to @assignment.chapter.try(:name), chapter_path(@assignment.chapter_id) %> , <%= link_to @assignment.topic.try(:name), topic_path(@assignment.topic_id) %></b>
-  </div>
-	
+		</code>
+		<%= link_to "edit", edit_solution_path(solution.id) %> | 
+		<%= link_to "delete", solution_path(solution.id), method: :delete, data: {confirm: "Are you sure?"} %>
+	</div>
+	<% end %>
 
-
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
-
+</div>
+</div>
 </div>

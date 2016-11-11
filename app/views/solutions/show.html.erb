@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @solution.body %>
+</p>
+
+<p>
+  <strong>Assignment:</strong>
+  <%= @solution.assignment_id %>
+</p>
+
+<%= link_to 'Edit', edit_solution_path(@solution) %> |
+<%= link_to 'Back', solutions_path %>
