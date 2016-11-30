@@ -42,10 +42,10 @@
 
 	<% @assignment.solutions.each do |solution| %>
 	<div class="well">
-		<code>
+		<pre>
 			<%= raw(solution.body) %>
 
-		</code>
+		</pre>
 		<%= link_to "edit", edit_solution_path(solution.id) %> | 
 		<%= link_to "delete", solution_path(solution.id), method: :delete, data: {confirm: "Are you sure?"} %>
 	</div>
