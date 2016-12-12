@@ -41,14 +41,20 @@
   </div>
 
  <div class="form-group">
-    <label>Select Students:</label>
-    <br/>
-
+    
   <label>Select Student</label><br/>
-   <%= f.collection_check_boxes :student_ids, current_user.students.where('student_type = ?', 'enrolled'), :id, :name do |b| %>
+   <%# f.collection_check_boxes :student_ids, current_user.students.where('student_type = ?', 'enrolled'), :id, :name do |b| %>
         
-        <%= b.check_box %> <%= b.label %><br/>
-   <% end %>
+        <%#= b.check_box %> <%#= b.label %><br/>
+   <%# end %>
+
+   <script>
+   $(document).ready(function(){
+    $("#batch_student_ids").chosen();
+   })
+   </script>
+
+   <%= f.select :student_ids, Student.where('student_type = ?', 'enrolled').pluck(:name, :id), {}, {:multiple => true, :class => "chosen-select", :style => "width:450px;" } %>
 
 </div>
 
