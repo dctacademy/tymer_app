@@ -19,7 +19,7 @@
 			<% data = {} %>
 				<% 
 					data["enrolled"] = source.students.where('student_type = ?', "enrolled").size
-					data["lead"] = source.students.where('student_type = ?', "lead") 
+					data["lead"] = source.students.where('student_type = ?', "lead").size
 					data["prospect"] = source.students.where('student_type = ?', "prospect").size
 					data["lost"] = source.students.where('student_type = ?', "lost").size
 				%>
