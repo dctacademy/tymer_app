@@ -1,3 +1,5 @@
+<% line_chart_data = [] %>
+
 <div class="row">
 	<% data = {} 
 		total = 0
@@ -7,8 +9,14 @@
 			data[month.strftime("%B")] = income
 			total += income
 		end	
+
+		line_chart_data.push({
+			"name" => 2017,
+			"data" => data
+			})
 	%>
 	
+
 	<div class="page-header">
 		<h2>Income by Month <small> INR <%= total %> in  2017</small></h2>
 	</div>
@@ -72,8 +80,14 @@
 			data[month.strftime("%B")] = income
 			total += income
 		end	
+
+		line_chart_data.push({
+			"name" => 2016,
+			"data" => data
+			})
 	%>
 	
+
 	<div class="page-header">
 		<h2>Income by Month <small> INR <%= total %> in  2016</small></h2>
 	</div>
@@ -134,6 +148,11 @@
 			data[month.strftime("%B")] = income
 			total += income
 		end	
+
+		line_chart_data.push({
+			"name" => 2015,
+			"data" => data
+			})
 	%>
 	
 	<div class="page-header">
@@ -198,6 +217,10 @@
 			data[month.strftime("%B")] = income
 			total += income
 		end	
+		line_chart_data.push({
+			"name" => 2014,
+			"data" => data
+			})
 	%>
 	
 	<div class="page-header">
@@ -250,6 +273,39 @@
 	    </div><!-- Detail Tab ends -->
 	  </div>
 	</div><!-- Tab ends-->
+</div>
+
+<div class="row">
+	<div class="page-header">
+		<h2>Line Series</h2>
+	</div>
+	
+	<% data = [
+		{
+			"name" => "2014",
+			"data" => {
+				"jan" => 10,
+				"feb" => 20
+			}
+		},
+		{
+			"name" => "2015",
+			"data" => {
+				"jan" => 20,
+				"feb" => 30
+			}
+		},
+		{
+			"name" => "2016",
+			"data" => {
+				"jan" => 23,
+				"feb" => 24
+			}
+		}
+	]
+%>
+
+<%= line_chart(line_chart_data) %>
 </div>
 
 
