@@ -318,8 +318,16 @@
       </thead>
       
       <% fee_received = 0 %> 
+
+      <% fee_data = {
+          "cash" => 0, 
+          "online" => 0,
+          "cheque" => 0
+        } %>
+
       <tbody>
         <% @batch.payments.order('payment_date DESC').each do |payment| %>
+          <% fee_data[payment.payment_type] += payment.payment_amount %>
           <tr>
             <td><%= payment.student.name %></td>
             <td><%= payment.payment_date.strftime("%b %d, %Y") %></td>
@@ -335,10 +343,11 @@
       </tbody>
     </table>
 
+     <%= pie_chart(fee_data) %>
+     <%= column_chart(fee_data) %>
   </div>
 
     <div class="col-md-3">
-
       <strong>Total:</strong>
       <% total_fee = StudentBatch.where('batch_id = ?', @batch.id).sum(:course_fee) %>
       <%= total_fee %>
@@ -351,10 +360,10 @@
       <strong>Balance:</strong>
       <%= total_fee - fee_received %>
       <br/>
-
     </div>
 
     </div>
+     
   </div>
 </div>
   

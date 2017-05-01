@@ -1,5 +1,4 @@
 <% line_chart_data = [] %>
-
 <div class="row">
 	<% data = {} 
 		total = 0
@@ -16,7 +15,6 @@
 			})
 	%>
 	
-
 	<div class="page-header">
 		<h2>Income by Month <small> INR <%= total %> in  2017</small></h2>
 	</div>
@@ -277,33 +275,8 @@
 
 <div class="row">
 	<div class="page-header">
-		<h2>Line Series</h2>
+		<h2>Income Comparison</h2>
 	</div>
-	
-	<% data = [
-		{
-			"name" => "2014",
-			"data" => {
-				"jan" => 10,
-				"feb" => 20
-			}
-		},
-		{
-			"name" => "2015",
-			"data" => {
-				"jan" => 20,
-				"feb" => 30
-			}
-		},
-		{
-			"name" => "2016",
-			"data" => {
-				"jan" => 23,
-				"feb" => 24
-			}
-		}
-	]
-%>
 
 <%= line_chart(line_chart_data) %>
 </div>
