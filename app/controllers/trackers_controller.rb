@@ -25,7 +25,7 @@ class TrackersController < ApplicationController
     @tracker = Tracker.new(tracker_params)
     @tracker.user_id = current_user.id
     if @tracker.save
-      #Notifications.time_tracker(@tracker).deliver!
+      Notifications.time_tracker(@tracker).deliver!
       redirect_to batch_path(@tracker.batch_id), notice: "Successfully added tracker"
     else
       render action: 'new'
@@ -35,6 +35,7 @@ class TrackersController < ApplicationController
 
   def update
     @tracker.update(tracker_params)
+    Notifications.time_tracker(@tracker).deliver!
     respond_with(@tracker)
   end
 

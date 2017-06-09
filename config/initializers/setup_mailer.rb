@@ -4,13 +4,9 @@ ActionMailer::Base.smtp_settings = {
    :domain => "formio.in",
    :authentication => "plain",
    :enable_starttls_auto => true,
-   :user_name => "mail@formio.in",
-   :password => "passping123",
-   #:user_name => "ani@dctacademy.com",
-   #:password => "mag072529",
-   #:user_name => "aniruddha.s.g@gmail.com",
-   #:password => "passhost123",
+   :user_name => "dctacademyblr@gmail.com",
+   :password => "dct@Jayanagar430",
    :openssl_verify_mode  => 'none'
 }
 
-ActionMailer::Base.default_url_options[:host] = "www.formio.in"  
+ActionMailer::Base.default_url_options[:host] = "www.gmail.com"  
