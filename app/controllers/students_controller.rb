@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_filter :authenticate_user!
+ # before_filter :authenticate_user!
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_filter :prepare_exception_notifier
 
