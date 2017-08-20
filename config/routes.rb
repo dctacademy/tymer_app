@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :solutions
+  resources :tags
 
   namespace :student_dashboard do 
     get 'dashboard/index'

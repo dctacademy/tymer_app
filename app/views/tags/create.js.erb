@@ -1,0 +1,5 @@
+$("#assignment_tag_list").append('<%= escape_javascript(render "tag")%>');
+$('#myModal').modal('toggle');
+//$('.search-choice').last().after('<%= escape_javascript(render "chosen_tag") %>');
+$('#assignment_tag_list').trigger('chosen:updated');
+$('.chosen-results').append('<%= escape_javascript(render "chosen_tag") %>');
