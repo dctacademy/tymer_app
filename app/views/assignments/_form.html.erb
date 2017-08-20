@@ -12,23 +12,6 @@
     </div>
   <% end %>
 
-    <div class="form-group">
-      <%= f.label :topic_id %><br>
-      <%= f.collection_select :topic_id, Topic.all, :id, :name, {prompt: "Select"}, {class: "form-control"} %>
-    </div>
-
-  <p id="students"> </p>
-
-  <div class="form-group">
-    <%= f.label :chapter_id %><br>
-    <%= f.collection_select :chapter_id, Chapter.all, :id, :name, {prompt: "Select"}, {class: "form-control"} %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :difficulty_level %><br>
-    <%= f.select :level,["Beginner", "Intermediate", "Expert"], {prompt: "Select"}, {class: "form-control"} %>
-  </div>
-
   <div class="form-group">
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control" %>
@@ -72,13 +55,7 @@
 
 <script>
 $(document).ready(function() {
-    var topic = document.getElementById('assignment_topic_id');
-    topic.onchange = function(){
-        $.ajax({
-            type: "GET",
-            url: "/chapters/filter_chapters?topic_id=" +this.value
-        });
-    };
+   
     $('#assignment_tag_list').chosen();
     $('#assignment_tag_list').on('chosen:no_results', function(){
           jQuery.noConflict(); 

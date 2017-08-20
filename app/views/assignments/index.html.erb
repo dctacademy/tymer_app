@@ -16,9 +16,6 @@
       <th> # </th>
       <th> Code </th>
       <th>Name</th>
-      <th>Level</th>
-      <th>Topic</th>
-      <th>Chapter</th>
       <th>Tags</th>
       <th></th>
     </tr>
@@ -30,9 +27,7 @@
         <td><%= index + 1 %></td>
         <td><%= assignment.code %></td>
         <td><%= assignment.name %></td>
-        <td><%= assignment.level %></td>
-        <td><%= assignment.topic.try(:name) %></td>
-        <td><%= assignment.chapter.try(:name) %></td>
+      
         <td><%= assignment.tags.pluck(:name).join(', ') %></td>
         <td><%= link_to 'Show', assignment %> <%= link_to 'Edit', edit_assignment_path(assignment) %> <%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
