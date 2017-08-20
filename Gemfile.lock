@@ -27,6 +27,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (4.0.0)
+      activerecord (>= 4.0)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.11)
     builder (3.2.2)
@@ -134,6 +136,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 4.0)
   chartkick
   coffee-rails (~> 4.0.0)
   devise (= 3.3.0)

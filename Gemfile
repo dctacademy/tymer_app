@@ -7,6 +7,7 @@ gem 'devise', '3.3.0'
 gem 'exception_notification'
 gem 'rails_12factor'
 gem "nested_form"
+gem 'acts-as-taggable-on', '~> 4.0'
 gem 'rabl'
 #gem 'wysihtml5n-rails'
 gem 'groupdate'

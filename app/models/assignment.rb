@@ -1,5 +1,6 @@
 class Assignment < ActiveRecord::Base
-
+	acts_as_taggable 
+	
 	has_many :batch_assignments
 	has_many :batches, through: :batch_assignments
 	belongs_to :topic
