@@ -66,7 +66,7 @@ class AssignmentsController < ApplicationController
   def search
     @assignments = []
     if params[:tags]
-      params[:type] == "any" ? @assignments = Assignment.tagged_with(params[:tags].split(","), any: true) : @assignments = Assignment.tagged_with(params[:tags].split(","), match_all: true)
+      params[:type] == "any" ? @assignments = Assignment.tagged_with(params[:tags], any: true) : @assignments = Assignment.tagged_with(params[:tags], match_all: true)
     end
   end
 

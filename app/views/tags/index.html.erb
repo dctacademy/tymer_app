@@ -1,0 +1,40 @@
+<div class="col-md-8">
+  <div class="page-header">
+    <h2>Listing Tags</h2>
+  </div>
+
+<table class="table table-striped" id="myTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= tag.taggings_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<div class="col-md-4">
+ <div class="page-header">
+    <h2>Add Tag</h2>
+  </div>
+   <%= form_for(ActsAsTaggableOn::Tag.new, url: "/tags", remote: true) do |f| %>
+         <div class="form-group">
+           <%= f.label :name %><br>
+           <%= f.text_field :name, class: "form-control" %>
+         </div>
+        <%= f.submit "Submit", class: "btn btn-default" %>
+        <% end %>
+</div>
+
+<script>
+$('#myTable').DataTable();
+</script>

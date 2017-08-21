@@ -11,8 +11,7 @@
                     <div class="input-group col-md-offset-2">
                      <%= radio_button_tag 'type', 'any', checked: true %> Any
                         <%= radio_button_tag 'type', 'match-all' %> Match All
-
-                        
+          
                         <%= select_tag "tags", options_from_collection_for_select(ActsAsTaggableOn::Tag.order('name'), "name", "name"), multiple: true, class: "form-control" 
  %>
  
@@ -29,8 +28,7 @@
 <script>
 $('#tags').chosen();
 $('#tags').on('change', function(){
-    var type = $('#type_any').is(":checked") ? "any" : "match_all";
-    console.log('/assignments/search.js?tags=' + $('#tags').val() + '&type=' + type);
+   var type = $('#type_any').is(":checked") ? "any" : "match_all";
    $.ajax({url: '/assignments/search_ajax?tags=' + $('#tags').val() + '&type=' + type}, function(response){
         console.log(response);
    });

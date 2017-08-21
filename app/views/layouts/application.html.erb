@@ -20,7 +20,7 @@
 <script src='/lib/moment.min.js'></script>
 <script src='/lib/jquery.min.js'></script>
 <script src='/fullcalendar.min.js'></script>
-<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>tinymce.init({selector:'textarea'});</script>
 
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -95,6 +95,7 @@
             <li class="divider"></li>
             <li><%= link_to "Topics", topics_path %></li>
             <li><%= link_to "Assignments", assignments_path %></li>
+            <li><%= link_to "Tags", tags_path %></li>
             <li class="divider"></li>
             <li><%= link_to "States", states_path %></li>
             <li><%= link_to "Cities", cities_path %></li>

@@ -1,5 +1,7 @@
 $("#assignment_tag_list").append('<%= escape_javascript(render "tag")%>');
+$('#myTable').append('<%= escape_javascript(render "table_tag") %>');
+$('#new_acts_as_taggable_on_tag')[0].reset();
 $('#myModal').modal('toggle');
 //$('.search-choice').last().after('<%= escape_javascript(render "chosen_tag") %>');
 $('#assignment_tag_list').trigger('chosen:updated');
-$('.chosen-results').append('<%= escape_javascript(render "chosen_tag") %>');
+//$('.chosen-results').append('<%= escape_javascript(render "chosen_tag") %>');
