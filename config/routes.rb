@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/assignments/search'
+  get '/assignments/search_ajax'
   resources :solutions
   resources :tags
 

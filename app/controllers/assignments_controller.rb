@@ -62,6 +62,21 @@ class AssignmentsController < ApplicationController
     end
   end
 
+
+  def search
+    @assignments = []
+    if params[:tags]
+      params[:type] == "any" ? @assignments = Assignment.tagged_with(params[:tags].split(","), any: true) : @assignments = Assignment.tagged_with(params[:tags].split(","), match_all: true)
+    end
+  end
+
+  def search_ajax
+    @assignments = []
+    if params[:tags]
+      params[:type] == "any" ? @assignments = Assignment.tagged_with(params[:tags].split(","), any: true) : @assignments = Assignment.tagged_with(params[:tags].split(","), match_all: true)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment

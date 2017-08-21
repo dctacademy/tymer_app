@@ -1,0 +1,22 @@
+<table class="table table-striped" id="assignmentTable">
+  <thead>
+    <tr>
+      <th> Code </th>
+      <th>Name</th>
+      <th>Tags</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.code %></td>
+        <td><%= assignment.name %></td>
+      
+        <td><%= assignment.tags.pluck(:name).join(', ') %></td>
+        <td><%= link_to 'Show', assignment %> <%= link_to 'Edit', edit_assignment_path(assignment) %> <%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

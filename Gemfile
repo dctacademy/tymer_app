@@ -9,6 +9,7 @@ gem 'rails_12factor'
 gem "nested_form"
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'rabl'
+gem 'pry'
 #gem 'wysihtml5n-rails'
 gem 'groupdate'
 # Use sqlite3 as the database for Active Record
