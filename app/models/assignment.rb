@@ -7,7 +7,7 @@ class Assignment < ActiveRecord::Base
 	belongs_to :chapter
 	has_many :solutions
 
-	validates :name, :topic_id, :chapter_id, :level, presence: true
+	validates :name, presence: true
 	validates :description, {presence: true, length: {minimum: 10 }}
 
 	before_create :generate_code 
