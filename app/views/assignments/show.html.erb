@@ -11,7 +11,7 @@
 		<b> Tags : <%= @assignment.tags.map(&:name).join(", ") %>
 		</b>
 		<br/>
-		<b><%= @assignment.level %>, <%= link_to @assignment.chapter.try(:name), chapter_path(@assignment.chapter_id) %> , <%= link_to @assignment.topic.try(:name), topic_path(@assignment.topic_id) %></b>
+	
 	  </div>
 		
 	<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
