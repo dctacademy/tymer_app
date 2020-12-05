@@ -16,7 +16,7 @@ gem 'pry'
 gem 'groupdate'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3','~> 1.3.13', group: :development
-gem 'pg', group: :production
+gem 'pg','0.15.1', group: :production
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
