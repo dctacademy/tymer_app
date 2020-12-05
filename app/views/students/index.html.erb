@@ -71,6 +71,7 @@
   </thead>
 
   <tbody>
+  <%if @lead_students.present?%>
     <% @lead_students.each do |student| %>
       <tr id="student_<%= student.id %>">
         <td>
@@ -119,6 +120,7 @@
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
+    <% end %>
   </tbody>
 </table>
     
@@ -139,6 +141,7 @@
   </thead>
 
   <tbody>
+  <%if @prospective_students.present?%>
     <% @prospective_students.each do |student| %>
       <tr id="student_<%= student.id %>">
         <td>
@@ -187,6 +190,7 @@
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
+    <%end%>
   </tbody>
 </table>
     
@@ -209,6 +213,7 @@
   </thead>
 
   <tbody>
+  <%if @workshop_colleges.present?%>
     <% @workshop_colleges.each do |student| %>
       <tr id="student_<%= student.id %>">
         <td>
@@ -257,6 +262,7 @@
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
+    <%end%>
   </tbody>
 </table>
     
@@ -277,6 +283,7 @@
   </thead>
 
   <tbody>
+  <%if @lost_students.present?%>
     <% @lost_students.each do |student| %>
       <tr id="student_<%= student.id %>">
         <td>
@@ -324,6 +331,7 @@
         <td><%= student.created_at.strftime("%a %d %b, %Y") %></td>
       </tr>
     <% end %>
+    <%end%>
   </tbody>
 </table>
     </div>
