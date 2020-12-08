@@ -6,11 +6,15 @@ class StudentsController < ApplicationController
   respond_to :html
 
   def index
+    if current_user.present?
     @students = current_user.students.where('student_type = ?', 'enrolled')
     @lead_students = current_user.students.where('student_type = ?', 'lead').order('created_at DESC')
     @prospective_students = current_user.students.where('student_type = ?', 'prospect').order('created_at DESC')
     @lost_students = current_user.students.where('student_type = ?', 'lost').order('created_at DESC')
     @workshop_colleges = current_user.students.where('learning_style = ?', 'workshop')
+    else 
+      @students = Student.all
+    end
     respond_with(@students)
   end
 

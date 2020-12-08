@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
+ruby '2.5.8'
+gem 'json', '1.8.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2'
-gem 'devise', '3.3.0'
+gem 'rails', '4.2.8'
+gem 'devise'
 gem 'exception_notification'
 gem 'rails_12factor'
 gem "nested_form"
@@ -13,8 +15,8 @@ gem 'pry'
 #gem 'wysihtml5n-rails'
 gem 'groupdate'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development
-gem 'pg', group: :production
+gem 'sqlite3','~> 1.3.13', group: :development
+gem 'pg','0.15.1', group: :production
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
