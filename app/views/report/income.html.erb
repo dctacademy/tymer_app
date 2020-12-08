@@ -1,8 +1,74 @@
 <% line_chart_data = [] %>
 
+<div class="row">
+    <% data = {} 
+		total = 0
+		@payments_by_month_2020.each do |month,payments|
+			income = 0
+			payments.each {|payment| income += payment.payment_amount}
+			data[month.strftime("%B")] = income
+			total += income
+		end	
+
+		line_chart_data.push({
+			"name" => 2020,
+			"data" => data
+			})
+	%>
+
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2020 - 2021</small></h2>
+    </div>
+
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2020" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2020" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2020">
+                <br />
+                <%= column_chart(data, library: {
+	    				title: "Income for 2020"
+
+	    			}) %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="detail2020">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2020.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
+</div>
 
 <div class="row">
-	<% data = {} 
+    <% data = {} 
 		total = 0
 		@payments_by_month_2019.each do |month,payments|
 			income = 0
@@ -16,60 +82,60 @@
 			"data" => data
 			})
 	%>
-	
-	<div class="page-header">
-		<h2>Income by Month <small> INR <%= total %> in  2019 - 2020</small></h2>
-	</div>
 
-	<div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#chart2019" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
-	    <li role="presentation"><a href="#detail2019" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
-	  </ul>
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2019 - 2020</small></h2>
+    </div>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2019">
-	    		<br/>
-	    		<%= column_chart(data, library: {
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2019" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2019" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2019">
+                <br />
+                <%= column_chart(data, library: {
 	    				title: "Income for 2019"
 
 	    			}) %>
-	    </div>
+            </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2019">
-	    	<br/>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<% @payments_by_month_2019.each do |month, payments| %>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
-					          <%= month.strftime("%B") %>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					      <div class="panel-body">
-					        	<ul>
-											<% payments.each do |payment| %>
-												<li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
-											<% end %>
-					        	</ul>
-					      </div>
-					    </div>
-					  </div>
-					<% end %>
-					</div>
+            <div role="tabpanel" class="tab-pane" id="detail2019">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2019.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
 
-	    </div><!-- Detail Tab ends -->
-	  </div>
-	</div><!-- Tab ends-->
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
 </div>
 
 <div class="row">
-	<% data = {} 
+    <% data = {} 
 		total = 0
 		@payments_by_month_2018.each do |month,payments|
 			income = 0
@@ -83,60 +149,60 @@
 			"data" => data
 			})
 	%>
-	
-	<div class="page-header">
-		<h2>Income by Month <small> INR <%= total %> in  2018 - 2019</small></h2>
-	</div>
 
-	<div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#chart2018" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
-	    <li role="presentation"><a href="#detail2018" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
-	  </ul>
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2018 - 2019</small></h2>
+    </div>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2018">
-	    		<br/>
-	    		<%= column_chart(data, library: {
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2018" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2018" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2018">
+                <br />
+                <%= column_chart(data, library: {
 	    				title: "Income for 2018"
 
 	    			}) %>
-	    </div>
+            </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2018">
-	    	<br/>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<% @payments_by_month_2018.each do |month, payments| %>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
-					          <%= month.strftime("%B") %>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					      <div class="panel-body">
-					        	<ul>
-											<% payments.each do |payment| %>
-												<li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
-											<% end %>
-					        	</ul>
-					      </div>
-					    </div>
-					  </div>
-					<% end %>
-					</div>
+            <div role="tabpanel" class="tab-pane" id="detail2018">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2018.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
 
-	    </div><!-- Detail Tab ends -->
-	  </div>
-	</div><!-- Tab ends-->
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
 </div>
 
 <div class="row">
-	<% data = {} 
+    <% data = {} 
 		total = 0
 		@payments_by_month_2017.each do |month,payments|
 			income = 0
@@ -150,60 +216,60 @@
 			"data" => data
 			})
 	%>
-	
-	<div class="page-header">
-		<h2>Income by Month <small> INR <%= total %> in  2017 - 2018</small></h2>
-	</div>
 
-	<div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#chart2017" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
-	    <li role="presentation"><a href="#detail2017" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
-	  </ul>
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2017 - 2018</small></h2>
+    </div>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2017">
-	    		<br/>
-	    		<%= column_chart(data, library: {
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2017" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2017" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2017">
+                <br />
+                <%= column_chart(data, library: {
 	    				title: "Income for 2017"
 
 	    			}) %>
-	    </div>
+            </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2017">
-	    	<br/>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<% @payments_by_month_2017.each do |month, payments| %>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
-					          <%= month.strftime("%B") %>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					      <div class="panel-body">
-					        	<ul>
-											<% payments.each do |payment| %>
-												<li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
-											<% end %>
-					        	</ul>
-					      </div>
-					    </div>
-					  </div>
-					<% end %>
-					</div>
+            <div role="tabpanel" class="tab-pane" id="detail2017">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2017.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
 
-	    </div><!-- Detail Tab ends -->
-	  </div>
-	</div><!-- Tab ends-->
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
 </div>
 
 <div class="row">
-	<% data = {} 
+    <% data = {} 
 		total = 0
 		@payments_by_month_2016.each do |month,payments|
 			income = 0
@@ -217,61 +283,61 @@
 			"data" => data
 			})
 	%>
-	
 
-	<div class="page-header">
-		<h2>Income by Month <small> INR <%= total %> in  2016 - 2017</small></h2>
-	</div>
 
-	<div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#chart2016" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
-	    <li role="presentation"><a href="#detail2016" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
-	  </ul>
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2016 - 2017</small></h2>
+    </div>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2016">
-	    		<br/>
-	    		<%= column_chart(data, library: {
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2016" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2016" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2016">
+                <br />
+                <%= column_chart(data, library: {
 	    				title: "Income for 2016"
 
 	    			}) %>
-	    </div>
+            </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2016">
-	    	<br/>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<% @payments_by_month_2016.each do |month, payments| %>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
-					          <%= month.strftime("%B") %>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					      <div class="panel-body">
-					        	<ul>
-											<% payments.each do |payment| %>
-												<li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
-											<% end %>
-					        	</ul>
-					      </div>
-					    </div>
-					  </div>
-					<% end %>
-					</div>
+            <div role="tabpanel" class="tab-pane" id="detail2016">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2016.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
 
-	    </div><!-- Detail Tab ends -->
-	  </div>
-	</div><!-- Tab ends-->
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
 </div>
 
 <div class="row">
-	<% data = {} 
+    <% data = {} 
 		total = 0
 		@payments_by_month_2015.each do |month,payments|
 			income = 0
@@ -285,62 +351,62 @@
 			"data" => data
 			})
 	%>
-	
-	<div class="page-header">
-		<h2>Income by Month <small> INR <%= total %> in  2015 - 2016</small></h2>
-	</div>
 
-	<div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#chart2015" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
-	    <li role="presentation"><a href="#detail2015" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
-	  </ul>
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2015 - 2016</small></h2>
+    </div>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2015">
-	    		<br/>
-	    		<%= column_chart(data, library: {
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2015" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2015" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2015">
+                <br />
+                <%= column_chart(data, library: {
 	    				title: "Income for 2015", 
 	    				is3D: true
 
 	    			}) %>
-	    </div>
+            </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2015">
-	    	<br/>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<% @payments_by_month_2015.each do |month, payments| %>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
-					          <%= month.strftime("%B") %>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					      <div class="panel-body">
-					        	<ul>
-											<% payments.each do |payment| %>
-												<li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
-											<% end %>
-					        	</ul>
-					      </div>
-					    </div>
-					  </div>
-					<% end %>
-					</div>
+            <div role="tabpanel" class="tab-pane" id="detail2015">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2015.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
 
-	    </div><!-- Detail Tab ends -->
-	  </div>
-	</div><!-- Tab ends-->
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
 </div>
 
 
 <div class="row">
-	<% data = {} 
+    <% data = {} 
 		total = 0
 		@payments_by_month_2014.each do |month,payments|
 			income = 0
@@ -353,66 +419,63 @@
 			"data" => data
 			})
 	%>
-	
-	<div class="page-header">
-		<h2>Income by Month <small> INR <%= total %> in  2014 - 2015</small></h2>
-	</div>
 
-	<div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#chart2014" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
-	    <li role="presentation"><a href="#detail2014" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
-	  </ul>
+    <div class="page-header">
+        <h2>Income by Month <small> INR <%= total %> in 2014 - 2015</small></h2>
+    </div>
 
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="chart2014">
-	    		<br/>
-	    		<%= column_chart(data, library: {
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#chart2014" aria-controls="home" role="tab" data-toggle="tab">Chart View</a></li>
+            <li role="presentation"><a href="#detail2014" aria-controls="profile" role="tab" data-toggle="tab">Detailed View</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="chart2014">
+                <br />
+                <%= column_chart(data, library: {
 	    				title: "Income for 2014", 
 	    				is3D: true
 
 	    			}) %>
-	    </div>
+            </div>
 
-	    <div role="tabpanel" class="tab-pane" id="detail2014">
-	    	<br/>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<% @payments_by_month_2014.each do |month, payments| %>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
-					          <%= month.strftime("%B") %>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					      <div class="panel-body">
-					        	<ul>
-											<% payments.each do |payment| %>
-												<li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
-											<% end %>
-					        	</ul>
-					      </div>
-					    </div>
-					  </div>
-					<% end %>
-					</div>
+            <div role="tabpanel" class="tab-pane" id="detail2014">
+                <br />
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <% @payments_by_month_2014.each do |month, payments| %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= month %>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= month.strftime("%B") %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="<%= month %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul>
+                                    <% payments.each do |payment| %>
+                                    <li><%= payment.student.name %> paid INR <%= payment.payment_amount %> on <%= payment.payment_date.strftime("%A %d %B %Y") %>
+                                        <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
 
-	    </div><!-- Detail Tab ends -->
-	  </div>
-	</div><!-- Tab ends-->
+            </div><!-- Detail Tab ends -->
+        </div>
+    </div><!-- Tab ends-->
 </div>
 
 <div class="row">
-	<div class="page-header">
-		<h2>Income Comparison</h2>
-	</div>
+    <div class="page-header">
+        <h2>Income Comparison</h2>
+    </div>
 
-<%= line_chart(line_chart_data) %>
+    <%= line_chart(line_chart_data) %>
 </div>
-
-
-
